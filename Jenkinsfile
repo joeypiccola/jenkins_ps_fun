@@ -6,9 +6,9 @@ node {
         stage ('Get-VM') {
             powershell '''
                 Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass)
+                Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass) | out-null
                 $vm = Get-VM 'app'
-                Write-Output $vm
+                Write-Output $vm.name
             '''
         }
     }    
