@@ -19,7 +19,7 @@ node {
                 $vm = Get-VM 'nuget'
                 Write-Output $vm.name
                 Disconnect-VIServer -Force -Server vcenter -Confirm:$false             
-            '''
+            ''')
             println getvm
         }
     }    
