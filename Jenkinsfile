@@ -9,7 +9,7 @@ node {
                 Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass)
                 $vm = Get-VM 'app'
                 Write-Output $vm.name
-                Disconnect-VIServer -Force -Server vcenter -Confirm:$false
+                Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false
             '''
         }
         stage ('Get-VM #2') {
@@ -18,7 +18,7 @@ node {
                 Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass)
                 $vm = Get-VM 'nuget'
                 Write-Output $vm.name
-                Disconnect-VIServer -Force -Server vcenter -Confirm:$false             
+                Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false             
             ''')
             println getvm
         }
