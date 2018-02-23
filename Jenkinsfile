@@ -13,20 +13,18 @@ node {
             '''
         }
         stage ('Get-VM #2') {
-            def getvm = powershell(returnStdout: true, script: '''
+            getvm = powershell(returnStdout: true, script: '''
                 Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass)
+                Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass) | Out-Null
                 $vm = Get-VM 'nuget'
-                Write-Output $vm.name
-                Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false             
+                Write-Output "The server name is $($vm.name)"
+                Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false | Out-Null          
             ''')
-            def oi = 'blahblah'
         }
         stage ('show me what you got') {
-            powershell '''
-                Write-Output "maybe this: $($env:getvm)"
-                Write-Output "maybe thes: $($env:oi)"
-            '''            
+            oi = getvm
+            echo "oi is ${oi}"
+            echo "getvm is ${getvm}"          
         }
     }    
 }
