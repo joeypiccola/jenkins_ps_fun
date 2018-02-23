@@ -1,4 +1,8 @@
 node {
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+    }
+        
     stage ('clone') {
         git branch: 'test', changelog: false, poll: false, url: 'https://github.com/joeypiccola/control-repo.git'
     }
