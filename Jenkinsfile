@@ -20,11 +20,12 @@ node {
                 Write-Output $vm.name
                 Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false             
             ''')
-            echo getvm
+            def oi = 'blahblah'
         }
         stage ('show me what you got') {
             powershell '''
                 Write-Output "maybe this: $($env:getvm)"
+                Write-Output "maybe thes: $($env:oi)"
             '''            
         }
     }    
