@@ -14,11 +14,11 @@ node {
         }
         stage ('Get-VM #2') {
                 env.getvm = powershell(returnStdout: true, script: '''
-                Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass) | Out-Null
+                $blah = Get-Module -ListAvailable VMware* | Import-Module
+                $blah = Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenteruser) -Password $($env:vcenterpass)
                 $vm = Get-VM 'nuget'
                 Write-Output "The server name is $($vm.name)"
-                Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false | Out-Null          
+                $blah = Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false
             ''')
         }
         stage ('show me what you got') {
