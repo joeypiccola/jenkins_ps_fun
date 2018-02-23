@@ -20,6 +20,7 @@ node {
                 Write-Output $vm.name
                 Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false             
             ''')
+            echo getvm
         }
         stage ('show me what you got') {
             powershell '''
