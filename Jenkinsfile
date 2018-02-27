@@ -11,7 +11,7 @@ pipeline {
 	stages {
 		stage('stage #1') {
 			steps {
-                powershell '''
+                powershell returnStatus: true, script: '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
                     Connect-VIServer -Server $env:vcenter_server -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
                     $vm = Get-VM $env:vm_1
@@ -40,4 +40,12 @@ pipeline {
             }
         }
 	}
+    post {
+        failure {
+            powershell 'write-output "this runs on fail"'
+        }
+        always {
+            powershell 'write-output "this runs always"'
+        }
+    }
 }
