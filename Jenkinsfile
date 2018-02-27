@@ -10,7 +10,7 @@ pipeline {
 		stage('stage #1') {
 			steps {
                 powershell 'write-output "1: $($env:vcenter_cred_USR)"'
-                powershell 'write-output "2: $($env:vcenter_cred_PWD)"'
+                powershell 'write-output "2: $($env:vcenter_cred_PWS)"'
                 powershell 'write-output "3: $vcenter_cred_USR"'
                 powershell 'write-output "4: $vcenter_cred_PWD"'
 			}
