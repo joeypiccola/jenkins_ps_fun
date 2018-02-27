@@ -21,12 +21,12 @@ pipeline {
             parallel {
                 stage('stage #3.1') {
                     steps {
-                        powershell 'write-output 3.1'
+                        powershell 'sleep 10'
                     }
                 }
                 stage('stage #3.2') {
                     steps {
-                        powershell 'write-output 3.2'
+                        powershell 'sleep 20'
                     }
                 }
             }
