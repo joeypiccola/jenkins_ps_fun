@@ -16,7 +16,7 @@ pipeline {
                     Connect-VIServer -Server $env:vcenter_server -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
                     $vm = Get-VM $env:vm_1
                     Write-Output $vm.name
-                    Disconnect-VIServer -Force -Server vcenter -Confirm:$false
+                    Disconnect-VIServer -Force -Server $env:vcenter_server -Confirm:$false
                 '''
 			}
 		}
