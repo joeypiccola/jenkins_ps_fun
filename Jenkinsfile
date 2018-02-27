@@ -9,8 +9,6 @@ pipeline {
 	stages {
 		stage('stage #1') {
 			steps {
-                powershell 'write-output "1: $($env:vcenter_cred_USR)"'
-                powershell 'write-output "2: $($env:vcenter_cred_PSW)"'
                 powershell '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
                     Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
@@ -22,7 +20,7 @@ pipeline {
 		}
 		stage('stage #2') {
 			steps {
-				powershell 'write-output 1'
+				powershell returnStatus: true, script: '.\\Get-VM.ps1 -usr $env:vcenter_cred_USR -psw $env:vcenter_cred_PSW'
 			}
 		}
         stage('stage #3') {
