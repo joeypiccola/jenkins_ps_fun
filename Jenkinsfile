@@ -1,16 +1,35 @@
 pipeline {
 	agent any
-
+    options {
+        timeout(time: 20, unit: 'MINUTES')
+    }
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+    }    
 	stages {
-		stage ('Get-VM #1') {
+		stage('stage #1') {
 			steps {
 				powershell 'get-Childitem'
 			}
 		}
-		stage ('Get-VM #2') {
+		stage('stage #2') {
 			steps {
 				powershell 'write-output 1'
 			}
 		}
+        stage('stage #3') {
+            parallel {
+                stage('stage #3.1') {
+                    steps {
+                        powershell 'write-output 3.1'
+                    }
+                }
+                stage('stage #3.2') {
+                    steps {
+                        powershell 'write-output 3.2'
+                    }
+                }
+            }
+        }
 	}
 }
