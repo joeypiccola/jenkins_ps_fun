@@ -4,6 +4,7 @@ pipeline {
         vcenter_cred = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
     }
     parameters {
+        string(name: 'vcenter_server', defaultValue: 'vcenter.ad.piccola.us', description: 'The vCenter server to use.')
         string(name: 'vm_1', defaultValue: 'nuget', description: 'vm_1 to get')
         string(name: 'vm_2', defaultValue: 'app', description: 'vm_2 to get')
     }    
