@@ -4,13 +4,12 @@ pipeline {
 	stages {
 		stage ('Get-VM #1') {
 			steps {
-				powershell 'pwd'
+				powershell 'get-Childitem'
 			}
 		}
 		stage ('Get-VM #2') {
 			steps {
-				powershell 'cd c:\\'
-				powershell 'pwd'
+				powershell 'write-output 1'
 			}
 		}
 	}
