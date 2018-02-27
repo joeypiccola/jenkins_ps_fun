@@ -4,7 +4,7 @@ pipeline {
         timeout(time: 20, unit: 'MINUTES')
     }
     environment {
-        vcenter_cred = credential('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
+        vcenter_cred = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
