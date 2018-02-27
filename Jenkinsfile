@@ -11,10 +11,10 @@ pipeline {
 			steps {
                 powershell '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                    Connect-VIServer -Server 'vcenter.ad.piccola.us' -User $($env:vcenter_cred_USR) -Password $($env:vcenter_cred_PWD)
-                    $vm = Get-VM 'app'
+                    Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PWD
+                    $vm = Get-VM app
                     Write-Output $vm.name
-                    Disconnect-VIServer -Force -Server 'vcenter.ad.piccola.us' -Confirm:$false
+                    Disconnect-VIServer -Force -Server vcenter -Confirm:$false
                 '''
 			}
 		}
