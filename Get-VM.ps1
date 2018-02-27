@@ -1,6 +1,6 @@
 [CmdletBinding()]
 Param (
-    [Parameter(Mandatory)]]
+    [Parameter()]
     [string]$usr
     ,
     [Parameter()]
