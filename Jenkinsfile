@@ -9,13 +9,10 @@ pipeline {
 	stages {
 		stage('stage #1') {
 			steps {
-                powershell '''
-                    Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                    Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PWD
-                    $vm = Get-VM app
-                    Write-Output $vm.name
-                    Disconnect-VIServer -Force -Server vcenter -Confirm:$false
-                '''
+                powershell 'write-ouput "1: $($env:vcenter_cred_USR)"'
+                powershell 'write-ouput "2: $($env:vcenter_cred_PWD)"'
+                powershell 'write-ouput "3: $vcenter_cred_USR"'
+                powershell 'write-ouput "4: $vcenter_cred_PWD"'
 			}
 		}
 		stage('stage #2') {
