@@ -11,9 +11,9 @@ pipeline {
 	stages {
 		stage('stage #1') {
 			steps {
-                powershell returnStatus: true, script: '''
+                powershell '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                    Connect-VIServer -Server $env:vcenter_server -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
+                    Connect-VIServer -Server $env:vcenter_server -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW -erroraction stop
                     $vm = Get-VM $env:vm_1
                     Write-Output $vm.name
                     Disconnect-VIServer -Force -Server $env:vcenter_server -Confirm:$false
@@ -22,7 +22,7 @@ pipeline {
 		}
 		stage('stage #2') {
 			steps {
-				powershell returnStatus: true, script: '.\\Get-VM.ps1 -usr $env:vcenter_cred_USR -psw $env:vcenter_cred_PSW -vmname $env:vm_2 -vcenter $env:vcenter_server'
+				powershell '.\\Get-VM.ps1 -usr $env:vcenter_cred_USR -psw $env:vcenter_cred_PSW -vmname $env:vm_2 -vcenter $env:vcenter_server'
 			}
 		}
         stage('stage #3') {
