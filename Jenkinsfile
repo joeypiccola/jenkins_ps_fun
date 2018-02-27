@@ -1,14 +1,14 @@
 pipeline {
-	agent none
+	agent any
 
 	stages {
-		stage (Get-VM #1) {
+		stage ('Get-VM #1') {
 			steps {
 				powershell 'Write-Host red'
 				powershell 'Write-Host green'
 			}
 		}
-		stage (Get-VM #2) {
+		stage ('Get-VM #2') {
 			steps {
 				powershell 'Write-Host red'
 				powershell 'Write-Host green'
