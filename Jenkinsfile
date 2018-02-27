@@ -1,8 +1,5 @@
 pipeline {
 	agent any
-    options {
-        timeout(time: 20, unit: 'MINUTES')
-    }
     environment {
         vcenter_cred = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
     }
