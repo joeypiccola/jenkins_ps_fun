@@ -4,7 +4,10 @@ Param (
     [string]$usr
     ,
     [Parameter()]
-    [string]$psw
+	[string]$psw
+    ,
+    [Parameter()]
+    [string]$vmname	
 )
 
 Get-Module -ListAvailable VMware* | Import-Module | Out-Null

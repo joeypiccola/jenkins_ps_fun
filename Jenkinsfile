@@ -4,7 +4,8 @@ pipeline {
         vcenter_cred = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
     }
     parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string(name: 'vm_1', defaultValue: 'nuget', description: 'vm_1 to get')
+        string(name: 'vm_2', defaultValue: 'app', description: 'vm_2 to get')
     }    
 	stages {
 		stage('stage #1') {
@@ -12,7 +13,7 @@ pipeline {
                 powershell '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
                     Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
-                    $vm = Get-VM app
+                    $vm = Get-VM $env:vm_1
                     Write-Output $vm.name
                     Disconnect-VIServer -Force -Server vcenter -Confirm:$false
                 '''
@@ -20,7 +21,7 @@ pipeline {
 		}
 		stage('stage #2') {
 			steps {
-				powershell returnStatus: true, script: '.\\Get-VM.ps1 -usr $env:vcenter_cred_USR -psw $env:vcenter_cred_PSW'
+				powershell returnStatus: true, script: '.\\Get-VM.ps1 -usr $env:vcenter_cred_USR -psw $env:vcenter_cred_PSW -vmname $env:vm_2'
 			}
 		}
         stage('stage #3') {
