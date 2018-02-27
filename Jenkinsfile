@@ -13,7 +13,7 @@ pipeline {
                 powershell 'write-output "2: $($env:vcenter_cred_PSW)"'
                 powershell '''
                     Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-                    Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PWD
+                    Connect-VIServer -Server vcenter -User $env:vcenter_cred_USR -Password $env:vcenter_cred_PSW
                     $vm = Get-VM app
                     Write-Output $vm.name
                     Disconnect-VIServer -Force -Server vcenter -Confirm:$false
