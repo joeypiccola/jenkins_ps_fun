@@ -2,6 +2,7 @@ pipeline {
 	agent any
     environment {
         vcenter_cred = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
+        def vmid = ''
     }
     parameters {
         string(name: 'vcenter_server', defaultValue: 'vcenter.ad.piccola.us', description: 'The vCenter server to use.')
@@ -17,6 +18,7 @@ pipeline {
                     $vm = Get-VM $env:vm_1
                     Write-Output $vm.name
                     Disconnect-VIServer -Force -Server $env:vcenter_server -Confirm:$false
+                    $env:vmid = $vm.name
                 '''
 			}
 		}
@@ -29,7 +31,7 @@ pipeline {
             parallel {
                 stage('stage #3.1') {
                     steps {
-                        powershell 'sleep 1'
+                        powershell 'write-output "my value is $($env:vmid)"'
                     }
                 }
                 stage('stage #3.2') {
