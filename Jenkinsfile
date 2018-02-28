@@ -25,13 +25,13 @@ pipeline {
 			steps {
                 script {
                     if (env.win_domain == 'ad.piccola.us') {
-                        def user = vcenter_cred_adpiccolaus_USR
-                        def pass = vcenter_cred_adpiccolaus_PSW
+                        def vcenter_user = vcenter_cred_adpiccolaus_USR
+                        def vcenter_pass = vcenter_cred_adpiccolaus_PSW
                         echo 'ad.piccola.us'
                     }
                     if (env.win_domain == 'test.com') {
-                        def user = vcenter_cred_testcom_USR
-                        def pass = vcenter_cred_testcom_PSW
+                        def vcenter_user = vcenter_cred_testcom_USR
+                        def vcenter_pass = vcenter_cred_testcom_PSW
                         echo 'test.com'
                     } else {
                         echo "no credentials found matching win_domain = ${env.win_domain}"
@@ -40,5 +40,12 @@ pipeline {
                 }
 			}
 		}
+        stage('prerequisite checks') {
+            steps {
+                powershell '''
+                    powershell '.\\Get-VM.ps1 -usr $env:vcenter_user -psw $env:vcenter_pass -vmname nuget -vcenter $env:vcenter'
+                '''
+            }
+        }
 	}
 }
