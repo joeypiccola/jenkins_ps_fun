@@ -33,6 +33,8 @@ pipeline {
                         def user = vcenter_cred_testcom_USR
                         def pass = vcenter_cred_testcom_PSW
                         echo 'test.com'
+                    } else {
+                        echo 'fuuu'
                     }
                 }
 			}
