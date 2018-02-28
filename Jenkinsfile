@@ -25,15 +25,14 @@ pipeline {
 			steps {
                 script {
                     if (env.win_domain == 'ad.piccola.us') {
-                        env.vcenter_user = vcenter_cred_adpiccolaus_USR
-                        env.vcenter_pass = vcenter_cred_adpiccolaus_PSW
-                        env.vcenter_cred_status = true
+                        def env.vcenter_user = vcenter_cred_adpiccolaus_USR
+                        def env.vcenter_pass = vcenter_cred_adpiccolaus_PSW
+                        def env.vcenter_cred_status = true
                     }
                     if (env.win_domain == 'test.com') {
-                        env.vcenter_user = vcenter_cred_testcom_USR
-                        env.vcenter_pass = vcenter_cred_testcom_PSW
-                        env.vcenter_cred_status = true
-
+                        def env.vcenter_user = vcenter_cred_testcom_USR
+                        def env.vcenter_pass = vcenter_cred_testcom_PSW
+                        def env.vcenter_cred_status = true
                     }
                     if (env.vcenter_cred_status != true) {
                         echo "no credentials found matching win_domain = ${env.win_domain}"
