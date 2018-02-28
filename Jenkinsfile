@@ -34,7 +34,8 @@ pipeline {
                         def pass = vcenter_cred_testcom_PSW
                         echo 'test.com'
                     } else {
-                        echo 'no credentials found matching win_domain = ${env.win_domain}'
+                        echo "no credentials found matching win_domain = ${env.win_domain}"
+                        exit 1
                     }
                 }
 			}
