@@ -46,7 +46,7 @@ pipeline {
                         vcenter      = $env:vcenter
                         vmname       = $env:vmname
                     }
-                    .\\Get-VM.ps1 @params
+                    .\\Invoke-PrerequsitesChecks.ps1 @params
                 '''
             }
         }
