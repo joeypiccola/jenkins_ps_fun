@@ -23,16 +23,18 @@ pipeline {
 	stages {
 		stage('credential mapping') {
 			steps {
-                if (env.win_domain == 'ad.piccola.us') {
-                    def user = vcenter_cred_adpiccolaus_USR
-                    def pass = vcenter_cred_adpiccolaus_PSW
-                    echo 'ad.piccola.us'
+                script {
+                    if (env.win_domain == 'ad.piccola.us') {
+                        def user = vcenter_cred_adpiccolaus_USR
+                        def pass = vcenter_cred_adpiccolaus_PSW
+                        echo 'ad.piccola.us'
+                    }
+                    if (env.win_domain == 'test.com') {
+                        def user = vcenter_cred_testcom_USR
+                        def pass = vcenter_cred_testcom_PSW
+                        echo 'test.com'
+                    }
                 }
-                if (env.win_domain == 'test.com') {
-                    def user = vcenter_cred_testcom_USR
-                    def pass = vcenter_cred_testcom_PSW
-                    echo 'test.com'
-                }                
 			}
 		}
 	}
