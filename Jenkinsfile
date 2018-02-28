@@ -35,7 +35,7 @@ pipeline {
                         def vcenter_cred_status = true
 
                     }
-                    if (env.vcenter_cred_status != true) {
+                    if (vcenter_cred_status != true) {
                         echo "no credentials found matching win_domain = ${env.win_domain}"
                         exit 1
                     } else {
