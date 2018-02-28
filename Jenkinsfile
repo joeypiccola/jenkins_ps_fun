@@ -2,10 +2,6 @@ pipeline {
 	agent any
     environment {
         vcenter_cred_adpiccolaus = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
-        if ("ad.piccola.us".equals(win_domain)) {
-            def vcenter_user = vcenter_cred_adpiccolaus_USR
-            return vcenter_user
-        }
     }
     parameters {
         string(name: 'vmname')
