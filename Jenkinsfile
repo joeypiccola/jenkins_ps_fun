@@ -8,6 +8,7 @@ pipeline {
         string(name: 'vcenter_server', defaultValue: 'vcenter.ad.piccola.us', description: 'The vCenter server to use.')
         string(name: 'vm_1', defaultValue: 'nuget', description: 'vm_1 to get')
         string(name: 'vm_2', defaultValue: 'app', description: 'vm_2 to get')
+        text_parameter(name: 'vm_3', description: 'vm_3 to get')
     }    
 	stages {
 		stage('stage #1') {
