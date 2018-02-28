@@ -1,20 +1,27 @@
 [CmdletBinding()]
 Param (
     [Parameter()]
-    [string]$usr
+    [string]$vcenter_user
     ,
     [Parameter()]
-	[string]$psw
+    [string]$vcenter_pass
     ,
     [Parameter()]
-    [string]$vmname	
+    [string]$adjoin_user	
+    ,
+    [Parameter()]
+    [string]$adjoin_pass
     ,
     [Parameter()]
     [string]$vcenter
-	)
+    ,
+    [Parameter()]
+    [string]$vmname        
+)
 
 Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-Connect-VIServer -Server $vcenter -User $usr -Password $psw -erroraction stop
+Connect-VIServer -Server $vcenter -User $vcenter_user -Password $vcenter_pass -erroraction stop
 $vm = Get-VM $vmname
 Write-Output $vm
 Disconnect-VIServer -Force -Server $vcenter -Confirm:$false
+Get-ADComputer -Identity $vmname -properties * | select name, samaccountname, pa*

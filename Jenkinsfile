@@ -1,8 +1,8 @@
 pipeline {
 	agent any
     environment {
-        vcenter_cred_adpiccolaus = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
-        vcenter_cred_testcom = credentials('f89cc8d0-b680-417e-bb4c-4aadf3d64c43')
+        cred_adpiccolaus_vcenter = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
+        cred_adpiccolaus_adjoin = credentials('5d000f2e-6b25-42cf-8b6c-a25d03ea1827')
     }
     parameters {
         string(name: 'vmname')
@@ -25,12 +25,12 @@ pipeline {
 			steps {
                 script {
                     if (env.win_domain == 'ad.piccola.us') {
-                        env.vcenter_user = vcenter_cred_adpiccolaus_USR
-                        env.vcenter_pass = vcenter_cred_adpiccolaus_PSW
+                        env.adjoin_user = cred_adpiccolaus_adjoin_USR
+                        env.adjoin_pass = cred_adpiccolaus_adjoin_PSW
                     }
-                    if (env.win_domain == 'test.com') {
-                        env.vcenter_user = vcenter_cred_testcom_USR
-                        env.vcenter_pass = vcenter_cred_testcom_PSW
+                    if (env.vcenter == 'vcenter.ad.piccola.us') {
+                        env.vcenter_user = cred_adpiccolaus_vcenter_USR
+                        env.vcenter_pass = cred_adpiccolaus_vcenter_PSW
                     }
                 }
 			}
@@ -38,7 +38,15 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    powershell '.\\Get-VM.ps1 -usr $env:vcenter_user -psw $env:vcenter_pass -vmname nuget -vcenter $env:vcenter'
+                    $params = @{
+                        vcenter_user = $env:vcenter_user
+                        vcenter_pass = $env:vcenter_pass
+                        adjoin_user  = $env:adjoin_user
+                        adjoin_pass  = $env:adjoin_pass
+                        vcenter      = $env:vcenter
+                        vmname       = $env:vmname
+                    }
+                    .\\Get-VM.ps1 @params
                 '''
             }
         }
