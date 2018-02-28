@@ -8,19 +8,19 @@ pipeline {
         }
     }
     parameters {
-        string(name: 'vmname', description '')
-        string(name: 'vcenter', description '')
-        string(name: 'datacenter', description '')
-        string(name: 'cluster', description '')
-        string(name: 'datastore', description '')
-        string(name: 'portgroup', description '')
-        string(name: 'ip', description '')
-        string(name: 'gateway', description '')
-        string(name: 'netmask', description '')
-        string(name: 'dns_p', description '')
-        string(name: 'dns_s', description '')
-        string(name: 'dns_t', description '')
-        string(name: 'win_domain', description '')
+        string(name: 'vmname')
+        string(name: 'vcenter')
+        string(name: 'datacenter')
+        string(name: 'cluster')
+        string(name: 'datastore')
+        string(name: 'portgroup')
+        string(name: 'ip')
+        string(name: 'gateway')
+        string(name: 'netmask')
+        string(name: 'dns_p')
+        string(name: 'dns_s')
+        string(name: 'dns_t')
+        string(name: 'win_domain')
         
     }    
 	stages {
