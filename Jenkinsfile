@@ -27,15 +27,19 @@ pipeline {
                     if (env.win_domain == 'ad.piccola.us') {
                         def vcenter_user = vcenter_cred_adpiccolaus_USR
                         def vcenter_pass = vcenter_cred_adpiccolaus_PSW
-                        echo 'ad.piccola.us'
+                        def vcenter_cred_status = true
                     }
                     if (env.win_domain == 'test.com') {
                         def vcenter_user = vcenter_cred_testcom_USR
                         def vcenter_pass = vcenter_cred_testcom_PSW
-                        echo 'test.com'
-                    } else {
+                        def vcenter_cred_status = true
+
+                    }
+                    if (env.vcenter_cred_status != true) {
                         echo "no credentials found matching win_domain = ${env.win_domain}"
                         exit 1
+                    } else {
+                        echo "vcenter credential set to ${env.win_domain}"
                     }
                 }
 			}
