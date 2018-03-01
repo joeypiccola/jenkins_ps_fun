@@ -21,3 +21,7 @@ Param (
     [Parameter()]
     [string]$win_domain = $env:win_domain
 )
+
+$oi = Invoke-JSON -Action Get -JSONFile '.\envData.ps1' -Property 'RandomeNumber'
+
+Write-Output "the random number is `"$oi`""

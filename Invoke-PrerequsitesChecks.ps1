@@ -49,3 +49,5 @@ try {
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {
     Write-Error 'object exists'
 }
+
+Invoke-JSON -Action Set -JSONFIle '.\envData.json' -Property randomnumber -Value (Get-Random -Maximum 20000 -Minimum 10000)
