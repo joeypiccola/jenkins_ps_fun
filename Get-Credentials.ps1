@@ -6,6 +6,7 @@ switch ($env:vcenter -replace '^.+?\.(.+)$','$1')
     'ad.piccola.us' {
         $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + 'adpiccolaus_USR')).value
         $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + 'adpiccolaus_PSW')).value
+        Write-Output 'ad.piccola.us was detected as vcenter domain'
     }
 }
 
