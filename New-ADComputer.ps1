@@ -12,7 +12,7 @@ Param (
     [Parameter()]
     [string]$win_domain = $env:win_domain
     ,
-    [Parameter()]
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$ou
 )
 
