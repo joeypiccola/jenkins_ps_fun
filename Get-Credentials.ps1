@@ -1,14 +1,14 @@
-$ad_user = (Get-ChildItem -Path ('env:cred_ad_' + ($env:win_domain.replace('.','')) + '_USR')).value
-$ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + ($env:win_domain.replace('.','')) + '_PSW')).value
+# take 'ad.contoso.com' and make it 'adcontosocom'
+$ad_key = ($env:win_domain.replace('.',''))
+Write-Information "ad_key = $ad_key"
+$ad_user = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_USR')).value
+$ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_PSW')).value
 
-switch ($env:vcenter -replace '^.+?\.(.+)$','$1')
-{
-    'ad.piccola.us' {
-        $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + 'adpiccolaus_USR')).value
-        $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + 'adpiccolaus_PSW')).value
-        Write-Output 'ad.piccola.us was detected as vcenter domain'
-    }
-}
+# take 'vcenter.ad.contoso.com' and make it 'adcontosocom'
+$vcenter_key = ($env:vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
+Write-Information "vcenter_key = $vcenter_key"
+$vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
+$vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
 $credentials = [PSCustomObject]@{
     vcenter_user = $vcenter_user
