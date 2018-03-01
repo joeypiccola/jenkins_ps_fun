@@ -1,16 +1,16 @@
 [CmdletBinding()]
 Param (
-    [Parameter()]
-    [string]$adjoin_user	
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$ad_user	
+    ,
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$ad_pass
     ,
     [Parameter()]
-    [string]$adjoin_pass
+    [string]$vmname = $env:vmname
     ,
     [Parameter()]
-    [string]$vmname
-    ,
-    [Parameter()]
-    [string]$win_domain          
+    [string]$win_domain = $env:win_domain
 )
 
 if ($win_domain -ne 'workgroup') {
@@ -22,8 +22,8 @@ if ($win_domain -ne 'workgroup') {
     }
 
     try {
-        $adsecpasswd = ConvertTo-SecureString $adjoin_pass -AsPlainText -Force
-        $adcreds = New-Object System.Management.Automation.PSCredential ($adjoin_user, $adsecpasswd)    
+        $adsecpasswd = ConvertTo-SecureString $ad_pass -AsPlainText -Force
+        $adcreds = New-Object System.Management.Automation.PSCredential ($ad_user, $adsecpasswd)    
         New-ADComputer -Server $win_domain -Credential $adcreds -Path $ou -Name $vmname
     } catch {
         Write-Error $_.Exception.Message

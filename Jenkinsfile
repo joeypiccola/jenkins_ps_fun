@@ -22,23 +22,24 @@ pipeline {
 
     }    
 	stages {
-        stage('prerequisite checks') {
+        stage('credential testing') {
             steps {
                 powershell '''
                     .\\Get-Credentials.ps1 | .\\Show-Credentials.ps1
                 '''
             }
         }
+        stage('prerequisite checks') {
+            steps {
+                powershell '''
+                    .\\Get-Credentials.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                '''
+            }
+        }        
         stage('stage ad computer') {
             steps {
                 powershell '''
-                    #$params = @{
-                    #    adjoin_user  = $env:adjoin_user
-                    #    adjoin_pass  = $env:adjoin_pass
-                    #    vmname       = $env:vmname
-                    #    win_domain   = $env:win_domain
-                    #}
-                    #.\\New-ADComputer.ps1 @params
+                    .\\New-ADComputer.ps1
                 '''
             }
         }        

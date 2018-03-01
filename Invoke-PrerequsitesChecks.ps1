@@ -19,7 +19,7 @@ Param (
     [string]$vmname = $env:vmname
     ,
     [Parameter()]
-    [string]$win_domain = $env:windomain
+    [string]$win_domain = $env:win_domain
 )
 
 $vmquery = $true
