@@ -1,7 +1,7 @@
 $ad_user = (Get-ChildItem -Path ('env:cred_ad_' + ($env:win_domain.replace('.','')) + '_USR')).value
 $ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + ($env:win_domain.replace('.','')) + '_PSW')).value
 
-switch ($vcenter -replace '^.+?\.(.+)$','$1')
+switch ($env:vcenter -replace '^.+?\.(.+)$','$1')
 {
     'ad.piccola.us' {
         $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + 'adpiccolaus_USR')).value
