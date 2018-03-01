@@ -14,11 +14,21 @@ $vcenter_key = ($env:vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
-$credentials = [PSCustomObject]@{
+switch ($win_domain) {
+    'ad.piccola.us' {
+        $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
+    }
+    'cis.com' {
+        $ou = 'OU=Test,OU=Servers,DC=cis,DC=com'
+    }
+}
+
+$envdata = [PSCustomObject]@{
     vcenter_user = $vcenter_user
     vcenter_pass = $vcenter_pass
     ad_user      = $ad_user
     ad_pass      = $ad_pass
+    ou           = $ou
 }
 
-Write-Output $credentials
+Write-Output $envdata

@@ -11,18 +11,12 @@ Param (
     ,
     [Parameter()]
     [string]$win_domain = $env:win_domain
+    ,
+    [Parameter()]
+    [string]$ou
 )
 
 if ($win_domain -ne 'workgroup') {
-    switch ($win_domain) {
-        'ad.piccola.us' {
-            $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
-        }
-        'cis.com' {
-            $ou = 'OU=Test,OU=Servers,DC=cis,DC=com'
-        }
-    }
-
     try {
         $adsecpasswd = ConvertTo-SecureString $ad_pass -AsPlainText -Force
         $adcreds = New-Object System.Management.Automation.PSCredential ($ad_user, $adsecpasswd)    

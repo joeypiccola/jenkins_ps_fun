@@ -19,29 +19,34 @@ pipeline {
         string(name: 'dns_s')
         string(name: 'dns_t')
         string(name: 'win_domain')
+        string(name: 'disk_1')
+        string(name: 'disk_2')
+        string(name: 'disk_3')
+        string(name: 'disk_4')
+        string(name: 'disk_5')
 
-    }    
+    }
 	stages {
-        stage('credential testing') {
-            steps {
-                powershell '''
-                    .\\Get-Credentials.ps1 | .\\Show-Credentials.ps1
-                '''
-            }
-        }
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    .\\Get-Credentials.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                    .\\Get-EnvData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
-        }        
-        stage('stage ad computer') {
+        }
+        stage('stage ADComputer') {
             steps {
                 powershell '''
-                    .\\Get-Credentials.ps1 | .\\New-ADComputer.ps1
+                    .\\Get-EnvData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
-        }        
+        }
+        stage('stage OSCustomizationSpec') {
+            steps {
+                powershell '''
+                    #.\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
+                '''
+            }
+        }
 	}
 }
