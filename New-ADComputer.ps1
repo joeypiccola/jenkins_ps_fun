@@ -16,6 +16,8 @@ Param (
     [string]$ou
 )
 
+. .\helperFunctions.ps1
+
 if ($win_domain -ne 'workgroup') {
     try {
         $adsecpasswd = ConvertTo-SecureString $ad_pass -AsPlainText -Force

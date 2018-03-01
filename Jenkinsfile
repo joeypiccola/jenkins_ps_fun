@@ -30,7 +30,6 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    . .\\helperFunctions.ps1
                     .\\Get-EnvData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
@@ -38,7 +37,6 @@ pipeline {
         stage('stage ADComputer') {
             steps {
                 powershell '''
-                    . .\\helperFunctions.ps1
                     .\\Get-EnvData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
@@ -46,7 +44,6 @@ pipeline {
         stage('stage OSCustomizationSpec') {
             steps {
                 powershell '''
-                    . .\\helperFunctions.ps1
                     .\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
