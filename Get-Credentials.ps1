@@ -15,4 +15,4 @@ $credentials = [PSCustomObject]@{
     ad_pass      = $ad_user
 }
 
-Write-Output "the vcenter user is: $vcenter_user"
+Write-Output $credentials
