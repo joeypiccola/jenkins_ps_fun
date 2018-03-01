@@ -14,7 +14,7 @@ $vcenter_key = ($env:vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
-switch ($win_domain) {
+switch ($env:win_domain) {
     'ad.piccola.us' {
         $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
     }
