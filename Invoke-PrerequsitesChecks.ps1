@@ -1,28 +1,26 @@
 [CmdletBinding()]
 Param (
-    [Parameter()]
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$vcenter_user
     ,
-    [Parameter()]
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$vcenter_pass
     ,
-    [Parameter()]
-    [string]$adjoin_user	
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$ad_user	
+    ,
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$ad_pass
     ,
     [Parameter()]
-    [string]$adjoin_pass
+    [string]$vcenter = $env:vcenter
     ,
     [Parameter()]
-    [string]$vcenter
+    [string]$vmname = $env:vmname
     ,
     [Parameter()]
-    [string]$vmname
-    ,
-    [Parameter()]
-    [string]$win_domain          
+    [string]$win_domain = $env:windomain
 )
-
-Write-Output "my jenkins env var is $env:blah"
 
 $vmquery = $true
 $adquery = $true

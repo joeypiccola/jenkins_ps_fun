@@ -1,9 +1,9 @@
 pipeline {
 	agent any
     environment {
-        cred_adpiccolaus_vcenter = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
-        cred_adpiccolaus_adjoin = credentials('5d000f2e-6b25-42cf-8b6c-a25d03ea1827')
-        blah = 'woot'
+        cred_vcenter_adpiccolaus = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
+        cred_ad_adpiccolaus = credentials('5d000f2e-6b25-42cf-8b6c-a25d03ea1827')
+        cred_ad_ciscom = credentials('f81564bb-2c87-475e-b7ae-ae3d9efbc79b')
     }
     parameters {
         string(name: 'vmname')
@@ -43,29 +43,20 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    $params = @{
-                        vcenter_user = $env:vcenter_user
-                        vcenter_pass = $env:vcenter_pass
-                        adjoin_user  = $env:adjoin_user
-                        adjoin_pass  = $env:adjoin_pass
-                        vcenter      = $env:vcenter
-                        vmname       = $env:vmname
-                        win_domain   = $env:win_domain
-                    }
-                    .\\Invoke-PrerequsitesChecks.ps1 @params
+                    .\\Get-Credentials.ps1 | .\\Show-Credentials.ps1
                 '''
             }
         }
         stage('stage ad computer') {
             steps {
                 powershell '''
-                    $params = @{
-                        adjoin_user  = $env:adjoin_user
-                        adjoin_pass  = $env:adjoin_pass
-                        vmname       = $env:vmname
-                        win_domain   = $env:win_domain
-                    }
-                    .\\New-ADComputer.ps1 @params
+                    #$params = @{
+                    #    adjoin_user  = $env:adjoin_user
+                    #    adjoin_pass  = $env:adjoin_pass
+                    #    vmname       = $env:vmname
+                    #    win_domain   = $env:win_domain
+                    #}
+                    #.\\New-ADComputer.ps1 @params
                 '''
             }
         }        
