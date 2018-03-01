@@ -16,7 +16,10 @@ Param (
     [string]$vcenter
     ,
     [Parameter()]
-    [string]$vmname        
+    [string]$vmname
+    ,
+    [Parameter()]
+    [string]$win_domain          
 )
 
 $vmquery = $true
@@ -37,7 +40,7 @@ try {
 try {
     $adsecpasswd = ConvertTo-SecureString $adjoin_pass -AsPlainText -Force
     $adcreds = New-Object System.Management.Automation.PSCredential ($adjoin_user, $adsecpasswd)
-    $ad = Get-ADComputer -Identity $vmname -ErrorAction Stop -Credential $adcreds
+    $ad = Get-ADComputer -Identity $vmname -Credential $adcreds -Server $win_domain -ErrorAction Stop
 } catch {
     $adquery = $false
     Write-Warning $_.Exception.Message

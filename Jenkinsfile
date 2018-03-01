@@ -28,6 +28,10 @@ pipeline {
                         env.adjoin_user = cred_adpiccolaus_adjoin_USR
                         env.adjoin_pass = cred_adpiccolaus_adjoin_PSW
                     }
+                    if (env.win_domain == 'cis.com') {
+                        env.adjoin_user = cred_adpiccolaus_adjoin_USR
+                        env.adjoin_pass = cred_adpiccolaus_adjoin_PSW
+                    }                    
                     if (env.vcenter == 'vcenter.ad.piccola.us') {
                         env.vcenter_user = cred_adpiccolaus_vcenter_USR
                         env.vcenter_pass = cred_adpiccolaus_vcenter_PSW
@@ -45,6 +49,7 @@ pipeline {
                         adjoin_pass  = $env:adjoin_pass
                         vcenter      = $env:vcenter
                         vmname       = $env:vmname
+                        win_domain   - $env:win_domain
                     }
                     .\\Invoke-PrerequsitesChecks.ps1 @params
                 '''
