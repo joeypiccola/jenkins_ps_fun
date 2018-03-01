@@ -3,6 +3,7 @@ pipeline {
     environment {
         cred_adpiccolaus_vcenter = credentials('02ce81e7-6ab7-4c43-bc82-6104fe08b769')
         cred_adpiccolaus_adjoin = credentials('5d000f2e-6b25-42cf-8b6c-a25d03ea1827')
+        cred_ciscom_adjoin = credentials('tbd')
     }
     parameters {
         string(name: 'vmname')
@@ -18,10 +19,10 @@ pipeline {
         string(name: 'dns_s')
         string(name: 'dns_t')
         string(name: 'win_domain')
-        
+
     }    
 	stages {
-		stage('credential mapping') {
+        stage('credential mapping') {
 			steps {
                 script {
                     if (env.win_domain == 'ad.piccola.us') {
@@ -55,5 +56,18 @@ pipeline {
                 '''
             }
         }
+        stage('stage ad computer') {
+            steps {
+                powershell '''
+                    $params = @{
+                        adjoin_user  = $env:adjoin_user
+                        adjoin_pass  = $env:adjoin_pass
+                        vmname       = $env:vmname
+                        win_domain   = $env:win_domain
+                    }
+                    .\\New-ADComputer.ps1 @params
+                '''
+            }
+        }        
 	}
 }
