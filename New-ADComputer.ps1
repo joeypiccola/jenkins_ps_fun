@@ -15,7 +15,7 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$ou
 )
-
+Write-Output $ou
 if ($win_domain -ne 'workgroup') {
     try {
         $adsecpasswd = ConvertTo-SecureString $ad_pass -AsPlainText -Force
