@@ -1,12 +1,12 @@
 # take 'ad.contoso.com' and make it 'adcontosocom'
 $ad_key = ($env:win_domain.replace('.',''))
-Write-Information "ad_key = $ad_key"
+Write-Output "ad_key = $ad_key"
 $ad_user = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_USR')).value
 $ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_PSW')).value
 
 # take 'vcenter.ad.contoso.com' and make it 'adcontosocom'
 $vcenter_key = ($env:vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
-Write-Information "vcenter_key = $vcenter_key"
+Write-Output "vcenter_key = $vcenter_key"
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
