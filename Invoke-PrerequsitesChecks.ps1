@@ -22,6 +22,8 @@ Param (
     [string]$win_domain          
 )
 
+Write-Output "my jenkins env var is $env:blah"
+
 $vmquery = $true
 $adquery = $true
 
