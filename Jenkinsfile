@@ -39,7 +39,7 @@ pipeline {
         stage('stage ad computer') {
             steps {
                 powershell '''
-                    .\\New-ADComputer.ps1
+                    .\\Get-Credentials.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }        

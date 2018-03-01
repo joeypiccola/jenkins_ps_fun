@@ -18,7 +18,9 @@ if ($win_domain -ne 'workgroup') {
         'ad.piccola.us' {
             $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
         }
-        Default {}
+        'cis.com' {
+            $ou = 'OU=Test,OU=Servers,DC=cis,DC=com'
+        }
     }
 
     try {
