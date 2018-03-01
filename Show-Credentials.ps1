@@ -13,7 +13,7 @@ Param (
     [string]$ad_pass
 )
 
-Write-Host $vcenter_user -ForegroundColor Green
-Write-Host $vcenter_pass -ForegroundColor Yellow
-Write-Host $ad_user -ForegroundColor Magenta
-Write-Host $ad_pass -ForegroundColor Cyan
+Write-Output "v user: $vcenter_user"
+Write-Output "v pass: $vcenter_pass"
+Write-Output "a user: $ad_user"
+Write-Output "a pass: $ad_pass"

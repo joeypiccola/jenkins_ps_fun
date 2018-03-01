@@ -25,7 +25,7 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    .\\Get-Credentials.ps1 # | .\\Show-Credentials.ps1
+                    .\\Get-Credentials.ps1 | .\\Show-Credentials.ps1
                 '''
             }
         }
