@@ -49,7 +49,7 @@ pipeline {
                         adjoin_pass  = $env:adjoin_pass
                         vcenter      = $env:vcenter
                         vmname       = $env:vmname
-                        win_domain   - $env:win_domain
+                        win_domain   = $env:win_domain
                     }
                     .\\Invoke-PrerequsitesChecks.ps1 @params
                 '''
