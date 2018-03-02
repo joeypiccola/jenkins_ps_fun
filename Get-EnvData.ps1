@@ -23,12 +23,15 @@ switch ($env:win_domain) {
     }
 }
 
+$spec_name = 'ISG-Dyn-Spec_' + (Get-Random -Maximum 20000 -Minimum 10000)
+
 $envdata = [PSCustomObject]@{
     vcenter_user = $vcenter_user
     vcenter_pass = $vcenter_pass
     ad_user      = $ad_user
     ad_pass      = $ad_pass
     ou           = $ou
+    spec_name    = $spec_name
 }
 
 Write-Output $envdata
