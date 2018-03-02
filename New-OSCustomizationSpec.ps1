@@ -25,7 +25,7 @@ Param (
     [string]$cspec_name
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$disks    
+    [PSCustomObject]$disks    
 )
 
 Write-Output $cspec_name
