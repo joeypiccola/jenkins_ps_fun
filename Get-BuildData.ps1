@@ -1,7 +1,5 @@
 $builddata = Get-Content '.\builddata.json' | ConvertFrom-Json
 
-sleep -Seconds 120
-
 # take 'ad.contoso.com' and make it 'adcontosocom'
 # remove all dots from win_domain var
 # generate the env var $env:cred_ad_adcontosocom_USR and get the value
