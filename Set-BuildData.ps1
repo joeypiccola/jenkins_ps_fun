@@ -15,4 +15,4 @@ switch ($builddata.win_domain) {
 $builddata | Add-Member -NotePropertyName 'ou' -NotePropertyValue $ou
 
 # write it to a file
-$builddata | ConvertTo-Json -Depth 4 | Add-Content -Path '.\builddata.json'
+$builddata | ConvertTo-Json | Add-Content -Path '.\builddata.json'
