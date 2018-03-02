@@ -48,10 +48,10 @@ pipeline {
                 '''
             }
         }
-        post {
-            always {
-                cleanWS()
-            }
-        }
 	}
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
