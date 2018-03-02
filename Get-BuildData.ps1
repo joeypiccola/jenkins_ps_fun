@@ -13,7 +13,7 @@ $ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_PSW')).value
 # remove all dots and hostname from vcenter var
 # generate the env var $env:cred_vcenter_dallascontosocom_USR and get the value
 # generate the env var $env:cred_vcenter_dallascontosocom_PSW and get the value
-$vcenter_key = ($builddata:vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
+$vcenter_key = ($builddata.vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
