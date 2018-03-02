@@ -19,14 +19,14 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                    #.\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
         }
         stage('stage ADComputer') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
+                    #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
