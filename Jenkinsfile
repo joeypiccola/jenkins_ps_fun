@@ -37,14 +37,14 @@ pipeline {
         stage('stage ADComputer') {
             steps {
                 powershell '''
-                    .\\Get-EnvData.ps1 | .\\New-ADComputer.ps1
+                    #.\\Get-EnvData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
         stage('stage OSCustomizationSpec') {
             steps {
                 powershell '''
-                    .\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
+                    #.\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }

@@ -22,6 +22,8 @@ Param (
     [string]$win_domain = $env:win_domain
 )
 
+. .\helperFunctions.ps1
+
 $vmquery = $true
 $adquery = $true
 
