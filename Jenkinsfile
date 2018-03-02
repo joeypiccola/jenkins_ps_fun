@@ -44,7 +44,7 @@ pipeline {
         stage('stage OSCustomizationSpec') {
             steps {
                 powershell '''
-                    #.\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
+                    .\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }
