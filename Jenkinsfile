@@ -6,45 +6,34 @@ pipeline {
         cred_ad_ciscom = credentials('f81564bb-2c87-475e-b7ae-ae3d9efbc79b')
     }
     parameters {
-        string(name: 'vmname')
-        string(name: 'vcenter')
-        string(name: 'datacenter')
-        string(name: 'cluster')
-        string(name: 'datastore')
-        string(name: 'portgroup')
-        string(name: 'ip')
-        string(name: 'gateway')
-        string(name: 'netmask')
-        string(name: 'dns_p')
-        string(name: 'dns_s')
-        string(name: 'dns_t')
-        string(name: 'win_domain')
-        string(name: 'disk_1')
-        string(name: 'disk_2')
-        string(name: 'disk_3')
-        string(name: 'disk_4')
-        string(name: 'disk_5')
-
+        string(name: 'buildspec')
     }
 	stages {
+        stage('set build data') {
+            steps {
+                powershell '''
+                    .\\Set-BuildData.ps1
+                '''
+            }
+        }
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    .\\Get-EnvData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                    .\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
         }
         stage('stage ADComputer') {
             steps {
                 powershell '''
-                    #.\\Get-EnvData.ps1 | .\\New-ADComputer.ps1
+                    #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
         stage('stage OSCustomizationSpec') {
             steps {
                 powershell '''
-                    .\\Get-EnvData.ps1 | .\\New-OSCustomizationSpec.ps1
+                    #.\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }

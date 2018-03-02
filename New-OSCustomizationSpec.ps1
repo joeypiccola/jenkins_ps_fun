@@ -12,14 +12,14 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$ad_pass
     ,
-    [Parameter()]
-    [string]$vcenter = $env:vcenter
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$vcenter
     ,
-    [Parameter()]
-    [string]$vmname = $env:vmname
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$vmname
     ,
-    [Parameter()]
-    [string]$win_domain = $env:win_domain
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$win_domain
 )
 
 . .\helperFunctions.ps1

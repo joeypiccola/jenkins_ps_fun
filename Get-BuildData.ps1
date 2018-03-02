@@ -23,7 +23,7 @@ switch ($env:win_domain) {
     }
 }
 
-$spec_name = 'ISG-Dyn-Spec_' + (Get-Random -Maximum 20000 -Minimum 10000)
+$builddata = Get-Content .\builddata.json | ConvertFrom-Json
 
 $envdata = [PSCustomObject]@{
     vcenter_user = $vcenter_user
@@ -31,7 +31,10 @@ $envdata = [PSCustomObject]@{
     ad_user      = $ad_user
     ad_pass      = $ad_pass
     ou           = $ou
-    spec_name    = $spec_name
+}
+
+$builddata | Get-Member -MemberType NoteProperty | Select -ExpandProperty Name | %{
+    Add-Member -InputObject $envdata -NotePropertyName $_ -NotePropertyValue $builddata.$_
 }
 
 Write-Output $envdata

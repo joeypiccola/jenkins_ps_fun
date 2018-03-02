@@ -12,17 +12,15 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$ad_pass
     ,
-    [Parameter()]
-    [string]$vcenter = $env:vcenter
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$vcenter
     ,
-    [Parameter()]
-    [string]$vmname = $env:vmname
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$vmname
     ,
-    [Parameter()]
-    [string]$win_domain = $env:win_domain
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$win_domain
 )
-
-. .\helperFunctions.ps1
 
 $vmquery = $true
 $adquery = $true
@@ -51,5 +49,3 @@ try {
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {
     Write-Error 'object exists'
 }
-
-Invoke-JSON -Action Set -JSONFIle (Join-Path -Path $env:WORKSPACE -ChildPath 'envdata.json') -Property 'randomnumber' -Value (Get-Random -Maximum 20000 -Minimum 10000)
