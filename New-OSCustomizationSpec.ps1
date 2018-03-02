@@ -28,7 +28,5 @@ Param (
     [pscustomobject]$disks
 )
 
-Write-Output $vcenter_user
-Write-Output $vcenter_pass
-Write-Output $ad_user
+
 Write-Output $disks
