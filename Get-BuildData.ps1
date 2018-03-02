@@ -21,4 +21,4 @@ $builddata | Add-Member -NotePropertyName 'vcenter_pass' -NotePropertyValue $vce
 $builddata | Add-Member -NotePropertyName 'ad_user' -NotePropertyValue $ad_user
 $builddata | Add-Member -NotePropertyName 'ad_pass' -NotePropertyValue $ad_pass
 
-Write-Output $builddata
+#Write-Output $builddata

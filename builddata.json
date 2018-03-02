@@ -1,0 +1,39 @@
+{
+    "vcenter":  "vcenter.ad.piccola.us",
+    "win_domain":  "ad.piccola.us",
+    "vmname":  "fake_04",
+    "disks":  [
+                  {
+                      "size":  "30",
+                      "letter":  "H",
+                      "label":  "mylabel_0",
+                      "au":  "4096"
+                  },
+                  {
+                      "size":  "30",
+                      "letter":  "H",
+                      "label":  "mylabel_1",
+                      "au":  "4096"
+                  },
+                  {
+                      "size":  "30",
+                      "letter":  "H",
+                      "label":  "mylabel_2",
+                      "au":  "4096"
+                  },
+                  {
+                      "size":  "30",
+                      "letter":  "H",
+                      "label":  "mylabel_3",
+                      "au":  "4096"
+                  },
+                  {
+                      "size":  "30",
+                      "letter":  "H",
+                      "label":  "mylabel_4",
+                      "au":  "4096"
+                  }
+              ],
+    "cspec_name":  "ISG-Dyn-Spec_11601",
+    "ou":  "OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us"
+}

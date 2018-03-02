@@ -24,15 +24,11 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$cspec_name
     ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    $disks    
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [pscustomobject]$disks
 )
 
-Write-Output $cspec_name
-Write-Output $disks[0]
-Write-Output 'blah'
+Write-Output $vcenter_user
+Write-Output $vcenter_pass
+Write-Output $ad_user
 Write-Output $disks
-
-#foreach ($disk in $disks) {
-#    Write-Output $disk
-#}
