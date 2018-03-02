@@ -30,8 +30,8 @@ Param (
 
 Write-Output $cspec_name
 Write-Output $disks
-$disks[0].label
+Write-Output 'blah'
 
 foreach ($disk in $disks) {
-    Write-Output "the disk lable is $($disk.label)"
+    Write-Output $disk
 }
