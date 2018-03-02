@@ -52,5 +52,5 @@ if (($adquery -eq $true) -or ($vmquery -eq $true)) {
     Write-Error 'object exists'
 }
 
-Add-Content -Path .\envdata.json -Value '{}'
+Add-Content -Path .\envdata.json -Value '{asdf}'
 #Invoke-JSON -Action Set -JSONFIle (Join-Path -Path $env:WORKSPACE -ChildPath 'envdata.json') -Property 'randomnumber' -Value (Get-Random -Maximum 20000 -Minimum 10000)
