@@ -24,6 +24,6 @@ Param (
 
 . .\helperFunctions.ps1
 
-$oi = Invoke-JSON -Action Get -JSONFile (Join-Path -Path $env:WORKSPACE -ChildPath 'envdata.json') -Property 'randomnumber'
+#$oi = Invoke-JSON -Action Get -JSONFile (Join-Path -Path $env:WORKSPACE -ChildPath 'envdata.json') -Property 'randomnumber'
 
-Write-Output "the random number is `"$oi`""
+#Write-Output "the random number is `"$oi`""
