@@ -29,9 +29,9 @@ Param (
 )
 
 Write-Output $cspec_name
-Write-Output $disks
+Write-Output $disks[0]
 Write-Output 'blah'
 
-foreach ($disk in $disks) {
-    Write-Output $disk
-}
+#foreach ($disk in $disks) {
+#    Write-Output $disk
+#}
