@@ -1,4 +1,4 @@
-$builddata = Get-Content .\builddata.json | ConvertFrom-Json
+$builddata = Get-Content '.\builddata.json' | ConvertFrom-Json
 
 sleep -Seconds 120
 
