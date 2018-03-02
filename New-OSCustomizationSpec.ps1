@@ -22,7 +22,13 @@ Param (
     [string]$win_domain
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$cspec_name    
+    [string]$cspec_name
+    ,
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$disks    
 )
 
 Write-Output $cspec_name
+foreach ($disk in $disks) {
+    Write-Output $disk
+}
