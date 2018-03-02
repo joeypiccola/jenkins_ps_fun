@@ -18,8 +18,10 @@ function Invoke-JSON
     )
 
     if (!(Test-Path $JSONFile)) {
-        Add-Content -Path '.\envData.json' -Value '{}'
+        Add-Content -Path $JSONFile -Value '{}'
     }
+
+    $json = Get-Content -Path $JSONFile | ConvertFrom-Json
 
     switch ($Action)
     {
@@ -31,7 +33,6 @@ function Invoke-JSON
             }
         }
         'Set' {
-            $json = Get-Content -Path $JSONFile | ConvertFrom-Json
             if ($json.$property) {
                 Add-Member -InputObject $json -NotePropertyName $property -NotePropertyValue $value -Force
                 $json | ConvertTo-Json | Set-Content -Path $JSONFile
