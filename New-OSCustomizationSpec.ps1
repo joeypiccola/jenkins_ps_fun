@@ -20,10 +20,9 @@ Param (
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$win_domain
+    ,
+    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [string]$cspec_name    
 )
 
-. .\helperFunctions.ps1
-
-$oi = Invoke-JSON -Action Get -JSONFile (Join-Path -Path $env:WORKSPACE -ChildPath 'envdata.json') -Property 'randomnumber'
-
-Write-Output "the random number is `"$oi`""
+Write-Output $cspec_name

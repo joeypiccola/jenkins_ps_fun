@@ -26,14 +26,14 @@ pipeline {
         stage('stage ADComputer') {
             steps {
                 powershell '''
-                    #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
+                    .\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
         stage('stage OSCustomizationSpec') {
             steps {
                 powershell '''
-                    #.\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
+                    .\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }
