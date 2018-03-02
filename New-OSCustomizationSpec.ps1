@@ -25,12 +25,13 @@ Param (
     [string]$cspec_name
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [pscustomobject]$disks    
+    $disks    
 )
 
 Write-Output $cspec_name
 Write-Output $disks[0]
 Write-Output 'blah'
+Write-Output $disks
 
 #foreach ($disk in $disks) {
 #    Write-Output $disk
