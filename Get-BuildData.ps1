@@ -1,4 +1,3 @@
-
 $builddata = Get-Content .\builddata.json | ConvertFrom-Json
 
 # take 'ad.contoso.com' and make it 'adcontosocom'
@@ -17,7 +16,7 @@ $vcenter_key = ($builddata.vcenter -replace '^.+?\.(.+)$','$1').Replace('.','')
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_' + $vcenter_key + '_PSW')).value
 
-switch ($builddata:win_domain) {
+switch ($builddata.win_domain) {
     'ad.piccola.us' {
         $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
     }
@@ -26,16 +25,10 @@ switch ($builddata:win_domain) {
     }
 }
 
-$envdata = [PSCustomObject]@{
-    vcenter_user = $vcenter_user
-    vcenter_pass = $vcenter_pass
-    ad_user      = $ad_user
-    ad_pass      = $ad_pass
-    ou           = $ou
-}
+$builddata | Add-Member -NotePropertyName 'vcenter_user' -NotePropertyValue $vcenter_user
+$builddata | Add-Member -NotePropertyName 'vcenter_pass' -NotePropertyValue $vcenter_pass
+$builddata | Add-Member -NotePropertyName 'ad_user' -NotePropertyValue $ad_user
+$builddata | Add-Member -NotePropertyName 'ad_pass' -NotePropertyValue $ad_pass
+$builddata | Add-Member -NotePropertyName 'ou' -NotePropertyValue $ou
 
-$builddata | Get-Member -MemberType NoteProperty | Select -ExpandProperty Name | %{
-    Add-Member -InputObject $envdata -NotePropertyName $_ -NotePropertyValue $builddata.$_
-}
-
-Write-Output $envdata
+Write-Output $builddata
