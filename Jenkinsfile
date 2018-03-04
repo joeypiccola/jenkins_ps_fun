@@ -16,6 +16,13 @@ pipeline {
                 '''
             }
         }
+        stage('get build data') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1
+                '''
+            }
+        }
         stage('prerequisite checks') {
             steps {
                 powershell '''
