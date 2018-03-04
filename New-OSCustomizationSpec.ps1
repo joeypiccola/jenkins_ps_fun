@@ -29,4 +29,6 @@ Param (
 )
 
 Write-Output $cspec_name
-Write-Output $disks
+foreach ($disk in $disks) {
+    Write-Output $disk.label
+}
