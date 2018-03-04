@@ -28,5 +28,5 @@ Param (
     [pscustomobject]$disks
 )
 
-
+Write-Output $cspec_name
 Write-Output $disks
