@@ -1,6 +1,6 @@
 # pull in the pipeline param build spec and convert it from json
-$builddata = $env:buildspec | ConvertFrom-Json
-#$builddata = '{"vcenter":"vcenter.ad.piccola.us","win_domain":"ad.piccola.us","vmname":"fake_04","disks":[{"size":"30","letter":"H","label":"mylabel_0","au":"4096"},{"size":"30","letter":"H","label":"mylabel_1","au":"4096"},{"size":"30","letter":"H","label":"mylabel_2","au":"4096"},{"size":"30","letter":"H","label":"mylabel_3","au":"4096"},{"size":"30","letter":"H","label":"mylabel_4","au":"4096"}]}' | ConvertFrom-Json
+#$builddata = $env:buildspec | ConvertFrom-Json
+$builddata = '{"vcenter":"vcenter.ad.piccola.us","win_domain":"ad.piccola.us","vmname":"fake_04","disks":[{"size":"30","letter":"H","label":"mylabel_0","au":"4096"},{"size":"30","letter":"H","label":"mylabel_1","au":"4096"},{"size":"30","letter":"H","label":"mylabel_2","au":"4096"},{"size":"30","letter":"H","label":"mylabel_3","au":"4096"},{"size":"30","letter":"H","label":"mylabel_4","au":"4096"}]}' | ConvertFrom-Json
 
 # add what we need to it
 $builddata | Add-Member -NotePropertyName 'cspec_name' -NotePropertyValue ('ISG-Dyn-Spec_' + (Get-Random -Maximum 20000 -Minimum 10000))
