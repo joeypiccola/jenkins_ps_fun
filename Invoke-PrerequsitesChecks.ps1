@@ -39,7 +39,7 @@ try {
 } catch {
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
     $vmquery = $false
-    Write-Error $_.Exception.Message
+    Write-Warning $_.Exception.Message
 }
 
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
@@ -49,7 +49,7 @@ try {
     Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
 } catch {
     $adquery = $false
-    Write-Error $_.Exception.Message
+    Write-Warning $_.Exception.Message
 }
 
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {
