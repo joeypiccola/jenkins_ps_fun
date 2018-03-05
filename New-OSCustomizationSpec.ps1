@@ -121,7 +121,7 @@ New-OSCustomizationSpec @specSplat
 sleep -Seconds 5
 try {
     $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name
-    Write-Information $OSCustomizationSpec
+    Write-Output $OSCustomizationSpec
     Disconnect-VIServer -Force -Confirm:$false
 }
 catch {
