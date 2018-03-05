@@ -32,7 +32,7 @@ Param (
 )
 Write-Output '---------------'
 Write-Output $cspec_name
-foreach ($disk in $disk_cfg) {
+foreach ($disk in $disk_cfg.disks) {
     Write-Output $disk.label
 }
 Write-Output '---------------'
