@@ -24,9 +24,12 @@ Param (
 
 $ErrorActionPreference = 'Stop'
 $InformationPreference = 'Continue'
+$WarningPreference = 'Continue'
 
 $vmquery = $true
 $adquery = $true
+
+# check and see if the objects we're about to create already exists
 
 # connect to vmware
 $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
@@ -40,7 +43,7 @@ try {
 } catch {
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
     $vmquery = $false
-    Write-Warning $_.Exception.Message
+    Write-Information $_.Exception.Message
 }
 
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
@@ -50,7 +53,7 @@ try {
     Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
 } catch {
     $adquery = $false
-    Write-Warning $_.Exception.Message
+    Write-Information $_.Exception.Message
 }
 
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {

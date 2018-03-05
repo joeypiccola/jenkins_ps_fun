@@ -14,6 +14,8 @@ Param (
 )
 
 $ErrorActionPreference = 'Stop'
+$InformationPreference = 'Continue'
+$WarningPreference = 'Continue'
 
 $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
 $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
@@ -26,6 +28,6 @@ try {
     Disconnect-VIServer -Force -Confirm:$false
 } catch {
     Disconnect-VIServer -Force -Confirm:$false
-    Write-Error $_.Exception.Message
+    Write-Warning $_.Exception.Message
     exit 1
 }

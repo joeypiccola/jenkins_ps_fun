@@ -17,6 +17,8 @@ Param (
 )
 
 $ErrorActionPreference = 'Stop'
+$InformationPreference = 'Continue'
+$WarningPreference = 'Continue'
 
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
 $ad_creds = New-Object System.Management.Automation.PSCredential ($ad_user, $ad_pass_sec) 

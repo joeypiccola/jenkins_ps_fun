@@ -41,6 +41,8 @@ Param (
 )
 
 $ErrorActionPreference = 'Stop'
+$InformationPreference = 'Continue'
+$WarningPreference = 'Continue'
 
 # take the provided disk config and convert it to json string
 $disk_cfg_file_contents = switch ($disk_cfg.disks.Count) {
@@ -124,6 +126,6 @@ try {
 }
 catch {
     Disconnect-VIServer -Force -Confirm:$false
-    Write-Error $_.Exception.Message
+    Write-Warning $_.Exception.Message
     exit 1
 }
