@@ -40,7 +40,7 @@ Write-Output $networking_cfg.dns_primary
 Write-Output $networking_cfg.dns_secondary
 Write-Output $networking_cfg.dns_tertiary
 Write-Output '---------------'
-Write-Output $disk_cfg
+Write-Output $disk_cfg | fl *
 Write-Output '---------------'
-Write-Output $networking_cfg
+Write-Output $networking_cfg | fl *
 Write-Output '---------------'
