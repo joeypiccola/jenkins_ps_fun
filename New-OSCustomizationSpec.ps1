@@ -77,3 +77,13 @@ if ($win_domain -eq 'workgroup') {
 else {
 
 }
+Write-Output '---------'
+Write-Output $disk_cfg_file_contents
+Write-Output '---------'
+Write-Output $networking_cfg_file_contents
+Write-Output '---------'
+foreach ($disk in $disk_cfg.disks) {
+    Write-Output "The label is $($disk.label)"
+}
+Write-Output '---------'
+Write-Output $disk_cfg.disks
