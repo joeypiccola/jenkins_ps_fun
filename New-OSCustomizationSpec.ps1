@@ -43,7 +43,7 @@ Param (
 # take the provided disk config and convert it to json string
 $disk_cfg_file_contents = switch ($disk_cfg.disks.Count) {
     {$PSItem -gt 0} {
-        Write-Output $disk_cfg.disks | ConvertTo-Json -Compress
+        Write-Output $disk_cfg | ConvertTo-Json -Compress
     }
     default {
         Write-Output 'nodisks'
