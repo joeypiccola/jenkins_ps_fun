@@ -23,6 +23,7 @@ Param (
 )
 
 $ErrorActionPreference = 'Stop'
+$InformationPreference = 'Continue'
 
 $vmquery = $true
 $adquery = $true
@@ -34,7 +35,7 @@ Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
 try {
-    $vm = Get-VM -Name $vmname
+    Get-VM -Name $vmname
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
 } catch {
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
