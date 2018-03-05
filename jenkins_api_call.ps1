@@ -1,7 +1,7 @@
 ﻿#$cred = Get-Credential
 #region disks
 $disks = @()
-0 .. 4 | %{
+0 .. 4 | ForEach-Object{
     $disk = [PSCustomObject]@{
         size   = @(10..1000) | Get-Random 
         letter = [char](@(65..90) | Get-Random)
