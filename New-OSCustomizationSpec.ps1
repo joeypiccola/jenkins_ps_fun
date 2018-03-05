@@ -58,7 +58,7 @@ if ($win_domain -eq 'workgroup') {
     )
     
     $specSplat = @{
-        Name                  = $params.spec_name
+        Name                  = $cspec_name
         OSType                = 'Windows'
         ChangeSid             = $true
         OrgName               = 'Workgroup'
