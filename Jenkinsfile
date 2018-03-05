@@ -34,7 +34,7 @@ pipeline {
         stage('new ADComputer') {
             steps {
                 powershell '''
-                    #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
+                    .\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
