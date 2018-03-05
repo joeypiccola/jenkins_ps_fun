@@ -34,7 +34,7 @@ $hardware_cfg = [PSCustomObject]@{
 #endregion
 
 $request = [pscustomobject]@{
-    vcenter         = 'vcenter.ad.piccola.us'
+    vcenter        = 'vcenter.ad.piccola.us'
     datacenter     = 'basement'
     cluster        = 'bc1'
     role           = 'Member Server'
