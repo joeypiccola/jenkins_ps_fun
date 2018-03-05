@@ -24,10 +24,10 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$cspec_name
     ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$disk_cfg
     ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$networking_cfg
 )
 
