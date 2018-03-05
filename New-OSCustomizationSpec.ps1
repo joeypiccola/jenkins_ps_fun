@@ -26,9 +26,16 @@ Param (
     ,
     [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$disks
+    ,
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [pscustomobject]$networking_cfg
 )
 
 Write-Output $cspec_name
 foreach ($disk in $disks) {
     Write-Output $disk.label
 }
+
+Write-Output $networking_cfg.dns_primary
+Write-Output $networking_cfg.dns_secondary
+Write-Output $networking_cfg.dns_tertiary
