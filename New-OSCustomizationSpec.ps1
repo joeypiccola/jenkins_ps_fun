@@ -40,6 +40,8 @@ Param (
     [pscustomobject]$networking_cfg
 )
 
+$ErrorActionPreference = 'Stop'
+
 # take the provided disk config and convert it to json string
 $disk_cfg_file_contents = switch ($disk_cfg.disks.Count) {
     {$PSItem -gt 0} {
@@ -104,18 +106,24 @@ if ($win_domain -eq 'workgroup') {
     }
 }
 
+# connect to vmware
 $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
 $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
-Get-Module -ListAvailable VMware* | Import-Module -ErrorAction SilentlyContinue | Out-Null
-$connection = Connect-VIServer -Server $vcenter -Credential $vcenter_cred | Out-Null
-New-OSCustomizationSpec @specSplat | Out-Null
+Get-Module -ListAvailable VMware* | Import-Module
+Connect-VIServer -Server $vcenter -Credential $vcenter_cred
+
+# create the spec
+New-OSCustomizationSpec @specSplat
+
+# sleep 5 seconds then try and get the previously created spec, if it does not exist then exit 1
 sleep -Seconds 5
 try {
-    $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name -ErrorAction Stop
-    Write-Output $OSCustomizationSpec
-    Disconnect-VIServer -Force -Confirm:$false | Out-Null
+    $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name
+    Write-Information $OSCustomizationSpec
+    Disconnect-VIServer -Force -Confirm:$false
 }
 catch {
-    Disconnect-VIServer -Force -Confirm:$false | Out-Null
+    Disconnect-VIServer -Force -Confirm:$false
+    Write-Error $_.Exception.Message
     exit 1
 }

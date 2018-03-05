@@ -27,24 +27,31 @@ pipeline {
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    #.\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                    .\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
         }
-        stage('stage ADComputer') {
+        stage('new ADComputer') {
             steps {
                 powershell '''
                     #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
-        stage('stage OSCustomizationSpec') {
+        stage('new OSCustomizationSpec') {
             steps {
                 powershell '''
                     .\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }
+        stage('remove OSCustomizationSpec') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
+                '''
+            }
+        }        
 	}
     post {
         always {

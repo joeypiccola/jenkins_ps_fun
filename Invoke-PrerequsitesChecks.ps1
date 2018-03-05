@@ -22,30 +22,38 @@ Param (
     [string]$win_domain
 )
 
+$ErrorActionPreference = 'Stop'
+
 $vmquery = $true
 $adquery = $true
 
+# connect to vmware
+$vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
+$vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
+Get-Module -ListAvailable VMware* | Import-Module
+Connect-VIServer -Server $vcenter -Credential $vcenter_cred
+
 try {
-    $vcentersecpasswd = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
-    $vcentercreds = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcentersecpasswd)
-    Get-Module -ListAvailable VMware* | Import-Module | Out-Null
-    Connect-VIServer -Server $vcenter -Credential $vcentercreds -ErrorAction Stop
-    $vm = Get-VM -Name $vmname -ErrorAction Stop
+    $vm = Get-VM -Name $vmname
+    Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
 } catch {
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
     $vmquery = $false
-    Write-Warning $_.Exception.Message
+    Write-Error $_.Exception.Message
 }
 
+$ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
+$ad_creds = New-Object System.Management.Automation.PSCredential ($ad_user, $ad_pass_sec) 
+
 try {
-    $adsecpasswd = ConvertTo-SecureString $ad_pass -AsPlainText -Force
-    $adcreds = New-Object System.Management.Automation.PSCredential ($ad_user, $adsecpasswd)
-    $ad = Get-ADComputer -Identity $vmname -Credential $adcreds -Server $win_domain -ErrorAction Stop
+    Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
 } catch {
     $adquery = $false
-    Write-Warning $_.Exception.Message
+    Write-Error $_.Exception.Message
 }
 
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {
-    Write-Error 'object exists'
+    Write-Information "ADObject `"$vmname`" $adquery in $win_domain"
+    Write-Information "VMObject `"$vmname`" $vmquery in $vcenter"
+    exit 1
 }
