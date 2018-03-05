@@ -46,6 +46,6 @@ $request = [pscustomobject]@{
     networking_cfg = $networking_cfg
 }
 
-$requestJSON = $request | ConvertTo-Json -Compress -Depth 5
+$requestJSON = $request | ConvertTo-Json -Compress -Depth 3
 $params = @{buildspec = $requestJSON}
 Invoke-JenkinsJob -Uri 'http://jenkins.ad.piccola.us:8080' -Credential $cred -Parameters $params -Name 'vmware_test'
