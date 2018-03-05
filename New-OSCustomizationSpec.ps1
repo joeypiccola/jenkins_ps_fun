@@ -86,4 +86,6 @@ foreach ($disk in $disk_cfg.disks) {
     Write-Output "The label is $($disk.label)"
 }
 Write-Output '---------'
+Write-Output $disk_cfg.disks | fl *
+Write-Output '---------'
 Write-Output $disk_cfg.disks
