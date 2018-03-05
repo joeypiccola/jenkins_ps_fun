@@ -108,7 +108,7 @@ $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
 $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
 Get-Module -ListAvailable VMware* | Import-Module -ErrorAction SilentlyContinue | Out-Null
 $connection = Connect-VIServer -Server $vcenter -Credential $vcenter_cred | Out-Null
-New-OSCustomizationSpec @splat | Out-Null
+New-OSCustomizationSpec @specSplat | Out-Null
 sleep -Seconds 5
 try {
     $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name -ErrorAction Stop
