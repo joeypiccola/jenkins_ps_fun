@@ -7,7 +7,7 @@ $builddata | Add-Member -NotePropertyName 'template_name' -NotePropertyValue (($
 # get the value of the OU
 switch ($builddata.win_domain) {
     'ad.piccola.us' {
-        $ou = 'OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
+        $ou = 'OU=JenkinsDeploymentTesting,OU=Test,OU=LabStuff,OU=Servers,DC=ad,DC=piccola,DC=us'
     }
     'cis.com' {
         $ou = 'OU=Test,OU=Servers,DC=cis,DC=com'

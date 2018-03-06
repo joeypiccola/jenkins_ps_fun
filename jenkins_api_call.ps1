@@ -1,6 +1,8 @@
 ﻿#$cred = Get-Credential
-#region disks
+#$i = 1
+$i++
 $disks = @()
+<#
 0 .. 4 | ForEach-Object{
     $disk = [PSCustomObject]@{
         size   = @(10..1000) | Get-Random 
@@ -10,13 +12,13 @@ $disks = @()
     }
     $disks += $disk
 }
+#>
 $disk_cfg = [PSCustomObject]@{
     disks = $disks
     profile = 'SQL'
     datastore = 'syno-vmware-iscsi-2'
 }
-#endregion
-#region other
+
 $networking_cfg = [PSCustomObject]@{
     ip            = '10.10.10.10'
     netmask       = '255.255.255.0'
@@ -31,7 +33,6 @@ $hardware_cfg = [PSCustomObject]@{
     sockets = 2
     memory = 2
 }
-#endregion
 
 $request = [pscustomobject]@{
     vcenter        = 'vcenter.ad.piccola.us'
@@ -40,7 +41,7 @@ $request = [pscustomobject]@{
     role           = 'Member Server'
     os             = '12R2S'
     win_domain     = 'ad.piccola.us'
-    vmname         = 'fake20'
+    vmname         = "JenkinsDepTest_$i"
     disk_cfg       = $disk_cfg
     hardware_cfg   = $hardware_cfg
     networking_cfg = $networking_cfg
