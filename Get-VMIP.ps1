@@ -43,6 +43,7 @@ switch ($stage)
 }
 
 try {
+    # wait 10 min for the vm to post tool's status
     $vm = Get-VM -Name $vmname
     Wait-Tools -VM $vm -TimeoutSeconds 600
 
