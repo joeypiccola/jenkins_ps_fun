@@ -22,11 +22,16 @@ $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_u
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
-try {
-    $get = Get-OSCustomizationSpec -Name $cspec_name
-    $get | Remove-OSCustomizationSpec -Confirm:$false
-} catch {
-    Write-Error $_.Exception.Message
-} finally {
-    Disconnect-VIServer -Force -Confirm:$false
+$get = Get-OSCustomizationSpec -Name $cspec_name -ErrorAction SilentlyContinue
+
+if ($get) {
+    try {
+        $get | Remove-OSCustomizationSpec -Confirm:$false
+    } catch {
+        Write-Error $_.Exception.Message
+    } finally {
+        Disconnect-VIServer -Force -Confirm:$false
+    }
+} else {
+    Write-Information "No OSCustomizationSpec was found to remove: `"$cspec_name`""
 }
