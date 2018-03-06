@@ -66,6 +66,13 @@ pipeline {
                 '''
             }
         }
+        stage('start VM') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Start-VM.ps1
+                '''
+            }
+        }        
         stage('remove OSCustomizationSpec') {
             steps {
                 powershell '''

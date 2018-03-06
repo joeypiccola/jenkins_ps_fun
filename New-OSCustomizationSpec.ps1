@@ -56,10 +56,10 @@ $role_script = $role.Replace(' ','_').ToLower()
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
     "cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
-    "cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json",
-    "c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
-    "c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
-    "c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
+    "cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
+    #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
+    #"c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
+    #"c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
 )
 
 # build a param splat based on the provided win_domain for the vmware customization spec

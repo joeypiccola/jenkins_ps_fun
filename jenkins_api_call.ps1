@@ -3,7 +3,7 @@
 $i++
 $disks = @()
 $letters = @('R','S','T','U','V')
-0 .. 1 | ForEach-Object{
+0 .. 4 | ForEach-Object{
     $disk = [PSCustomObject]@{
         size   = @(1..2) | Get-Random 
         letter = $letters[$_]
