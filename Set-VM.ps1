@@ -47,7 +47,7 @@ try {
             $totalCores = $selectedCores * $selectedSockets
             $coresPerSocket = $totalCores / $selectedSockets
             $vm = Get-VM -Name $vmname
-            $cpuspec = New-Object -TypeName PSCustomObject -Property @{numcorespersocket = $hardware_cfg.cores}
+            $cpuspec = [PSCustomObject]@{numcorespersocket = $hardware_cfg.cores}
             ($vm).ExtensionData.ReconfigVM_Task($cpuspec)
             $vm | Set-VM -numcpu $totalCores -Confirm:$false
         }
