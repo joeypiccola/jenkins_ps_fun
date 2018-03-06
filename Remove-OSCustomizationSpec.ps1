@@ -35,6 +35,6 @@ if ($get.count -eq 1) {
 } else {
     Disconnect-VIServer -Force -Confirm:$false
     # up for debate as to whether or not this should be a terminating error. the sepc we made
-    # should be available to remove, if it's there assume something went wrong...
+    # should be available to remove, if it's not there assume something went wrong...
     Write-Error "No OSCustomizationSpec was found to remove: `"$vcenter_user\$cspec_name`""
 }
