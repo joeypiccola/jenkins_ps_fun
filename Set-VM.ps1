@@ -15,7 +15,7 @@ Param (
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$datacenter
     ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$hardware_cfg
     ,
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -38,7 +38,7 @@ try {
         # clear notes from packer
         $vm | Set-VM -Notes '' -Confirm:$false
         # set the memory
-        #$vm | Set-VM -MemoryGB $hardware_cfg.memory -Confirm:$false
+        $vm | Set-VM -MemoryGB $hardware_cfg.memory -Confirm:$false
         # set the cpu, if the cpu config is different than the baseline template then adjust the cpu config
         if (!(($hardware_cfg.sockets -eq 1) -and ($hardware_cfg.cores -eq 1)))
         {
