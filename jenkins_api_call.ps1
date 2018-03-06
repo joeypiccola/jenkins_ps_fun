@@ -20,12 +20,12 @@ $disk_cfg = [PSCustomObject]@{
 }
 
 $networking_cfg = [PSCustomObject]@{
-    ip            = '10.10.10.10'
+    ip            = '10.0.5.100'
     netmask       = '255.255.255.0'
-    gateway       = '10.10.10.1'
-    dns_primary   = '1.1.1.1'
-    dns_secondary = '2.2.2.2'
-    dns_tertiary  = '3.3.3.3'
+    gateway       = '10.0.5.1'
+    dns_primary   = '10.0.3.21'
+    dns_secondary = '10.0.3.22'
+    dns_tertiary  = '8.8.8.8'
     portgroup     = 'vlan5'
 }
 $hardware_cfg = [PSCustomObject]@{
