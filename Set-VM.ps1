@@ -42,13 +42,13 @@ try {
         # set the cpu, if the cpu config is different than the baseline template then adjust the cpu config
         if (!(($hardware_cfg.sockets -eq 1) -and ($hardware_cfg.cores -eq 1)))
         {
-            [int]$selectedCores   = $hardware_cfg.cores
-            [int]$selectedSockets = $hardware_cfg.sockets
+            $selectedCores   = $hardware_cfg.cores
+            $selectedSockets = $hardware_cfg.sockets
             $totalCores = $selectedCores * $selectedSockets
             $coresPerSocket = $totalCores / $selectedSockets
             $vm = Get-VM -Name $vmname
-            $cpuspec = New-Object -TypeName psobject -Property @{numcorespersocket = $hardware_cfg.cores}
-            ($vmForCPU).ExtensionData.ReconfigVM_Task($cpuspec)
+            $cpuspec = New-Object -TypeName PSCustomObject -Property @{numcorespersocket = $hardware_cfg.cores}
+            ($vm).ExtensionData.ReconfigVM_Task($cpuspec)
             $vm | Set-VM -numcpu $totalCores -Confirm:$false
         }
         # add the disks
