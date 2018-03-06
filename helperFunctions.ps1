@@ -43,3 +43,47 @@ function Invoke-JSON
         }
     }
 }
+
+function Get-DatastoreClusters
+{
+    param
+    (
+        [CmdletBinding()]
+        [Parameter(Mandatory)]
+        [string]$Cluster
+    )
+
+    begin
+    {
+        # verify we can connect to the provided cluster.
+        if (!($GetCluster = Get-Cluster -Name $Cluster))
+        {
+            Write-Error "Unable to connect to `"$Cluster`" to get DatastoreClusters"
+        }
+    }
+    process
+    {
+        $pods = Get-Cluster $Cluster | Get-Datastore | ?{ $_.ParentFolderId -like 'StoragePod-group-*' } | sort -Unique -Property ParentFolderID
+        Write-Verbose "Found $($pods.count)x datastore cluster on $cluster cluster."
+
+        # if we have datastore clusters, use those. else, just go to the datastores
+        if ($pods)
+        {
+            foreach ($pod in $pods)
+            {
+                $GetPod = Get-DatastoreCluster -Id $pod.ParentFolderId
+                Write-Output $GetPod
+            }
+        }
+        else
+        {
+            $datastores = Get-Cluster $Cluster | Get-Datastore
+            foreach ($datastore in $datastores)
+            {
+                $ds = $datastore
+                Write-Output $ds
+            }
+        }
+    }
+    end {}
+}

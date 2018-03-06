@@ -115,13 +115,18 @@ Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
 # create the spec
-New-OSCustomizationSpec @specSplat
+try {
+    New-OSCustomizationSpec @specSplat
+} catch {
+    Write-Error $_.Exception.Message
+} finally {
+    Disconnect-VIServer -Force -Confirm:$false
+}
 
 # sleep 5 seconds then try and get the previously created spec, if it does not exist then exit 1
 sleep -Seconds 5
 try {
-    $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name
-    Write-Output $OSCustomizationSpec
+    Get-OSCustomizationSpec $cspec_name
 } catch {
     Write-Information $_.Exception.Message
     Write-Error "Unable to get the previously created OSCustomizationSpec: `"$cspec_name`""

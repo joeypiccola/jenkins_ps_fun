@@ -5,6 +5,7 @@ $WarningPreference = 'Continue'
 
 try {
     1/0
+    Write-Host 'does this run?'
 } catch {
     Write-Error 'catch #1'
 } finally {

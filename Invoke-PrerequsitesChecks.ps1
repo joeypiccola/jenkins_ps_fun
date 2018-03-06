@@ -34,6 +34,7 @@ $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
 $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
+
 # try and get the vm from vmware. on error, write info not error. evalualte the results at the end
 try {
     Get-VM -Name $vmname
@@ -44,8 +45,10 @@ try {
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
 }
 
+# define ad creds
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
 $ad_creds = New-Object System.Management.Automation.PSCredential ($ad_user, $ad_pass_sec) 
+
 # try and get the object from ad. on error, write info not error. evalualte the results at the end
 try {
     Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
