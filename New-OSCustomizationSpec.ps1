@@ -114,22 +114,14 @@ $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_u
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
-# create the spec
-try {
-    New-OSCustomizationSpec @specSplat
-} catch {
-    Write-Error $_.Exception.Message
-} finally {
-    Disconnect-VIServer -Force -Confirm:$false
-}
-
 # sleep 5 seconds then try and get the previously created spec, if it does not exist then exit 1
 sleep -Seconds 5
 try {
+    New-OSCustomizationSpec @specSplat
+    sleep -Seconds 5
     Get-OSCustomizationSpec $cspec_name
 } catch {
-    Write-Information $_.Exception.Message
-    Write-Error "Unable to get the previously created OSCustomizationSpec: `"$cspec_name`""
+    Write-Error $_.Exception.Message
 } finally {
     Disconnect-VIServer -Force -Confirm:$false
 }
