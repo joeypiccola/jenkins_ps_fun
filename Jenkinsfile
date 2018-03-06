@@ -24,39 +24,45 @@ pipeline {
                 '''
             }
         }
+        stage('jenkins error handling') {
+            steps {
+                powershell '''
+                    .\\Test-ErrorHandling.ps1
+                '''
+            }
+        } 
         stage('prerequisite checks') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
+                    #.\\Get-BuildData.ps1 | .\\Invoke-PrerequsitesChecks.ps1
                 '''
             }
         }
         stage('get template') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Get-Template.ps1
+                    #.\\Get-BuildData.ps1 | .\\Get-Template.ps1
                 '''
             }
         }        
         stage('new ADComputer') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
+                    #.\\Get-BuildData.ps1 | .\\New-ADComputer.ps1
                 '''
             }
         }
         stage('new OSCustomizationSpec') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
+                    #.\\Get-BuildData.ps1 | .\\New-OSCustomizationSpec.ps1
                 '''
             }
         }
-
         stage('remove OSCustomizationSpec') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
+                    #.\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
                 '''
             }
         }        
