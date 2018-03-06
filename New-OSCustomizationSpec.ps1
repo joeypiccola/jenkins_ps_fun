@@ -107,8 +107,7 @@ $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_u
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
-# sleep 5 seconds then try and get the previously created spec, if it does not exist then exit 1
-sleep -Seconds 5
+# make the spec then try and get it
 try {
     New-OSCustomizationSpec @specSplat
     sleep -Seconds 5

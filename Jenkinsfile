@@ -59,6 +59,13 @@ pipeline {
                 '''
             }
         }
+        stage('remove OSCustomizationSpec') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
+                '''
+            }
+        }
         stage('set VM') {
             steps {
                 powershell '''
@@ -72,14 +79,21 @@ pipeline {
                     .\\Get-BuildData.ps1 | .\\Start-VM.ps1
                 '''
             }
-        }        
-        stage('remove OSCustomizationSpec') {
+        }    
+        stage('get VM DHCP') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
+                    .\\Get-BuildData.ps1 | .\\Get-VMIP.ps1 -Stage DHCP
                 '''
             }
-        }        
+        }
+        stage('get VM Static') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Get-VMIP.ps1 -Stage Static
+                '''
+            }
+        }      
 	}
     post {
         always {

@@ -24,7 +24,7 @@ Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
 $get = Get-OSCustomizationSpec -Name $cspec_name -ErrorAction SilentlyContinue
 
-if ($get) {
+if ($get.count -eq 1) {
     try {
         $get | Remove-OSCustomizationSpec -Confirm:$false
     } catch {
@@ -33,5 +33,8 @@ if ($get) {
         Disconnect-VIServer -Force -Confirm:$false
     }
 } else {
-    Write-Information "No OSCustomizationSpec was found to remove: `"$cspec_name`""
+    Disconnect-VIServer -Force -Confirm:$false
+    # up for debate as to whether or not this should be a terminating error. the sepc we made
+    # should be available to remove, if it's there assume something went wrong...
+    Write-Error "No OSCustomizationSpec was found to remove: `"$vcenter_user\$cspec_name`""
 }

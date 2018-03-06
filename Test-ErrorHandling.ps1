@@ -4,9 +4,8 @@ $WarningPreference = 'Continue'
 
 
 try {
-    if (1 -eq 1) {
-        Write-Error 'boom'
-    }
+    Write-Host '1'
+    continue
     Write-Host 'did i see this'
 } catch {
     Write-Error $_.Exception.Message
