@@ -3,7 +3,7 @@ $builddata = $env:buildspec | ConvertFrom-Json
 # create the name of the OSCustomizationSpec
 $builddata | Add-Member -NotePropertyName 'cspec_name' -NotePropertyValue ('ISG-Dyn-Spec_' + (Get-Random -Maximum 20000 -Minimum 10000))
 # build teh name of the template to be used
-$builddata | Add-Member -NotePropertyName 'template_name' -NotePropertyValue (($vcenter.substring(0,4) + 'isgtmp' + $os).toupper())
+$builddata | Add-Member -NotePropertyName 'template_name' -NotePropertyValue (($builddata.vcenter.substring(0,4) + 'isgtmp' + $builddata.os).toupper())
 # get the value of the OU
 switch ($builddata.win_domain) {
     'ad.piccola.us' {
