@@ -37,11 +37,11 @@ Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 # try and get the vm from vmware. on error, write info not error. evalualte the results at the end
 try {
     Get-VM -Name $vmname
-    Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
 } catch {
-    Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
     $vmquery = $false
     Write-Information $_.Exception.Message
+} finally {
+    Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
 }
 
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force

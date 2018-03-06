@@ -122,10 +122,9 @@ sleep -Seconds 5
 try {
     $OSCustomizationSpec = Get-OSCustomizationSpec $cspec_name
     Write-Output $OSCustomizationSpec
+} catch {
+    Write-Information $_.Exception.Message
+    Write-Error "Unable to get the previously created OSCustomizationSpec: `"$cspec_name`""
+} finally {
     Disconnect-VIServer -Force -Confirm:$false
-}
-catch {
-    Disconnect-VIServer -Force -Confirm:$false
-    Write-Warning $_.Exception.Message
-    exit 1
 }
