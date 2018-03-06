@@ -29,14 +29,12 @@ $WarningPreference = 'Continue'
 $vmquery = $true
 $adquery = $true
 
-# check and see if the objects we're about to create already exists
-
 # connect to vmware
 $vcenter_pass_sec = ConvertTo-SecureString $vcenter_pass -AsPlainText -Force
 $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_user, $vcenter_pass_sec)
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
-
+# try and get the vm from vmware. on error, write info not error. evalualte the results at the end
 try {
     Get-VM -Name $vmname
     Disconnect-VIServer -Server $vcenter -Confirm:$false -Force
@@ -48,7 +46,7 @@ try {
 
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
 $ad_creds = New-Object System.Management.Automation.PSCredential ($ad_user, $ad_pass_sec) 
-
+# try and get the object from ad. on error, write info not error. evalualte the results at the end
 try {
     Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
 } catch {
@@ -56,8 +54,8 @@ try {
     Write-Information $_.Exception.Message
 }
 
+Write-Information "ADObject `"$vmname`" $adquery in $win_domain"
+Write-Information "VMObject `"$vmname`" $vmquery in $vcenter"
 if (($adquery -eq $true) -or ($vmquery -eq $true)) {
-    Write-Information "ADObject `"$vmname`" $adquery in $win_domain"
-    Write-Information "VMObject `"$vmname`" $vmquery in $vcenter"
-    exit 1
+    Write-Error 'Prerequsite checks failed: one or more objects exists'
 }
