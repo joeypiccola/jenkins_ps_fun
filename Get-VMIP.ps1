@@ -57,9 +57,9 @@ try {
         $vm = Get-VM -Name $vmname
         # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
         $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
-        if ($ip -ne $null)
+        if ($ip -ne $desiredIP)
         {
-            Write-Information "The system has posted the following IPv4 address: $ip == $desiredIP"
+            Write-Information "The system has posted the following IPv4 address: $ip"
             # now that we have the IP get out of the while loop and go to the finally block
             continue
         }

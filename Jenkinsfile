@@ -6,6 +6,9 @@ pipeline {
         cred_ad_ciscom = credentials('f81564bb-2c87-475e-b7ae-ae3d9efbc79b')
         cred_workgroup = credentials('70a5a300-d45d-4034-93c6-292d1b038285')
     }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
     parameters {
         string(name: 'buildspec')
     }
