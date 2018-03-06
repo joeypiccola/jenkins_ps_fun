@@ -76,16 +76,7 @@ pipeline {
 	}
     post {
         always {
-            steps {
-                cleanWs()
-            }
-        }
-        failure {
-            steps {
-                powershell '''
-                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
-                '''
-            }
+            cleanWs()
         }
     }
 }
