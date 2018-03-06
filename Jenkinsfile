@@ -59,6 +59,13 @@ pipeline {
                 '''
             }
         }
+        stage('set VM') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Set-VM.ps1
+                '''
+            }
+        }
         stage('remove OSCustomizationSpec') {
             steps {
                 powershell '''
@@ -70,6 +77,13 @@ pipeline {
     post {
         always {
             cleanWs()
+        }
+        failure {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Remove-OSCustomizationSpec.ps1
+                '''
+            }
         }
     }
 }

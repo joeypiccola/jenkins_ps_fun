@@ -2,20 +2,20 @@
 #$i = 1
 $i++
 $disks = @()
-<#
+$letters = @('R','S','T','U','V')
 0 .. 4 | ForEach-Object{
     $disk = [PSCustomObject]@{
-        size   = @(10..1000) | Get-Random 
-        letter = [char](@(65..90) | Get-Random)
-        label  = "mylabel_$_"
+        size   = @(1..2) | Get-Random 
+        letter = $letters[$_]
+        label  = "Label-$_-$($letters[$_])"
         au     = '4096'
     }
     $disks += $disk
 }
-#>
+
 $disk_cfg = [PSCustomObject]@{
     disks = $disks
-    profile = 'SQL'
+    profile = 'Custom'
     datastore = 'syno-vmware-iscsi-2'
 }
 

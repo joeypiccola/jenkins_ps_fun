@@ -4,10 +4,12 @@ $WarningPreference = 'Continue'
 
 
 try {
-    1/0
-    Write-Host 'does this run?'
+    if (1 -eq 1) {
+        Write-Error 'boom'
+    }
+    Write-Host 'did i see this'
 } catch {
-    Write-Error 'catch #1'
+    Write-Error $_.Exception.Message
 } finally {
     Write-Information 'cleaning up stuff #1'
 }

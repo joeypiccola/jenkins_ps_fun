@@ -44,17 +44,10 @@ $ErrorActionPreference = 'Stop'
 $InformationPreference = 'Continue'
 $WarningPreference = 'Continue'
 
-# take the provided disk config and convert it to json string
-$disk_cfg_file_contents = switch ($disk_cfg.disks.Count) {
-    {$PSItem -gt 0} {
-        Write-Output $disk_cfg | ConvertTo-Json -Compress
-    }
-    default {
-        Write-Output 'nodisks'
-    }
-}
+# take the provided disk config and convert it to a flat json string
+$disk_cfg_file_contents = $disk_cfg | ConvertTo-Json -Compress
 
-# take the provided networking config and convert it to json string
+# take the provided networking config and convert it to a flat json string
 $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
 
 # take the provided role and replace the spaces with an underscore
