@@ -39,7 +39,6 @@ Param (
     [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$networking_cfg
 )
-Add-Content -Path C:\deploy\diskcfg.json -Value
 
 $ErrorActionPreference = 'Stop'
 $InformationPreference = 'Continue'
