@@ -96,7 +96,21 @@ pipeline {
                     .\\Get-BuildData.ps1 | .\\Get-VMIP.ps1 -Stage static
                 '''
             }
-        }      
+        }
+        stage('set VM network') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Restart-VMGuest.ps1
+                '''
+            }
+        }
+        stage('restart vm') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Restart-VMGuest.ps1
+                '''
+            }
+        }
 	}
     post {
         always {

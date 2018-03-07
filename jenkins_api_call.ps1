@@ -20,11 +20,11 @@ $disk_cfg = [PSCustomObject]@{
 }
 
 $networking_cfg = [PSCustomObject]@{
-    ip          = '10.0.5.100'
+    ip          = "10.0.5.$(@(150..240) | Get-Random -count 1)"
     netmask     = '255.255.255.0'
     gateway     = '10.0.5.1'
     dns_servers = @('10.0.3.21','10.0.0.22','8.8.8.8')
-    portgroup   = 'vlan5'
+    portgroup   = 'VLAN5_deployment_testing'
 }
 $hardware_cfg = [PSCustomObject]@{
     cores = 1
