@@ -37,18 +37,18 @@ try {
     $vm = Get-VM -Name $vmname
     Wait-Tools -VM $vm -TimeoutSeconds 600
 
-    # wait 10 min, checking every 5 sec for VM to post to tools an ipv4 address
-    $timeoutSeconds = 600
-    $waitIntervalSeconds = 5
-    $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 600 / 5 = 120
-    $i = 0
     # depending on the stage (e.g. whether or not we're waiting for the system to come up on DHCP or the destired static)
     # alter the logic that detects what IP is detected (e.g. look for a IP post coming up or look for the specified static IP)
     switch ($stage) {
         'DHCP' {
+            # wait 10 min, checking every 5 sec for VM to post to tools an ipv4 address
+            $timeoutSeconds = 600
+            $waitIntervalSeconds = 5
+            $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 600 / 5 = 120
+            $i = 1
             while (($i -le $maxIntervals) -and ($ip -eq $null))
             {
-                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) sec elapsed so far"
+                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) of $timeoutSeconds sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
@@ -68,9 +68,14 @@ try {
             }
         }
         'static' {
+            # wait 15 min, checking every 5 sec for VM to post to tools an ipv4 address
+            $timeoutSeconds = 900
+            $waitIntervalSeconds = 5
+            $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 900 / 5 = 180
+            $i = 1
             while (($i -le $maxIntervals) -and ($ip -ne $networking_cfg.ip))
             {
-                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) sec elapsed so far"
+                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) of $timeoutSeconds sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
