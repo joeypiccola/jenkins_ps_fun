@@ -16,7 +16,7 @@ Param (
     [pscustomobject]$networking_cfg
     ,
     [Parameter(Mandatory)]
-    [ValidateSet('DHCP','Static')]
+    [ValidateSet('DHCP','static')]
     [string]$stage
 )
 
@@ -41,7 +41,7 @@ try {
     $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 600 / 5 = 120
     $i = 0
     # depending on the stage (e.g. whether or not we're waiting for the system to come up on DHCP or the destired static)
-    # alter the logic that detects what IP is deteced (e.g. look for a legit IP post coming up or look for the specified static IP)
+    # alter the logic that detects what IP is detected (e.g. look for a IP post coming up or look for the specified static IP)
     switch ($stage) {
         'DHCP' {
             while (($i -le $maxIntervals) -and ($ip -eq $null))
@@ -51,7 +51,7 @@ try {
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
                 if ($ip -ne $null)
                 {
-                    Write-Information "The system has posted the following IPv4 address: $ip"
+                    Write-Information "The system has posted the following, assumed DHCP, IPv4 address: $ip"
                     # now that we have the IP get out of the while loop and go to the finally block
                     continue
                 }
@@ -64,7 +64,7 @@ try {
                 }
             }
         }
-        'Static' {
+        'static' {
             while (($i -le $maxIntervals) -and ($ip -ne $networking_cfg.ip))
             {
                 $vm = Get-VM -Name $vmname
@@ -72,7 +72,7 @@ try {
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
                 if ($ip -eq $networking_cfg.ip)
                 {
-                    Write-Information "The system has posted the following IPv4 address: $ip"
+                    Write-Information "The system has posted the following, assumed static, IPv4 address: $ip"
                     # now that we have the IP get out of the while loop and go to the finally block
                     continue
                 }
