@@ -100,7 +100,7 @@ pipeline {
         stage('set VM network') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Restart-VMGuest.ps1
+                    .\\Get-BuildData.ps1 | .\\Set-NetworkAdapter.ps1
                 '''
             }
         }

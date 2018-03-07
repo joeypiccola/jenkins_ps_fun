@@ -24,6 +24,7 @@ Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
 try{
+    Wait-Tools -VM $vmname -TimeoutSeconds 600
     Restart-VMGuest -VM $vmname
 } catch {
     Write-Error $_.Exception.Message
