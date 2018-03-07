@@ -53,15 +53,31 @@ $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
 # take the provided role and replace the spaces with an underscore
 $role_script = $role.Replace(' ','_').ToLower()
 
+$string_194 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+$string_204 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+$string_210 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+$string_220 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+$string_230 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+$string_240 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+
+
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
-    "cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\netcfg.json -Value `'$networking_cfg_file_contents`'",
-    "cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\diskcfg.json -Value `'$disk_cfg_file_contents`'",
-    "c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
-    "c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
-    "c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
+    #"cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\netcfg.json -Value `'$networking_cfg_file_contents`'",
+    #"cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\diskcfg.json -Value `'$disk_cfg_file_contents`'",
+    "cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
+    "cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json",
+    "cmd /c echo $string_194 >> c:\deploy\diskcfg_236.json",
+    "cmd /c echo $string_204 >> c:\deploy\diskcfg_246.json",
+    "cmd /c echo $string_210 >> c:\deploy\diskcfg_256.json",
+    "cmd /c echo $string_220 >> c:\deploy\diskcfg_266.json",
+    "cmd /c echo $string_230 >> c:\deploy\diskcfg_276.json",
+    "cmd /c echo $string_240 >> c:\deploy\diskcfg_286.json"
+    #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
+    #"c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
+    #"c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
 )
-
+cmd /c echo  >> c:\deploy\diskcfg_220.json
 # build a param splat based on the provided win_domain for the vmware customization spec
 if ($win_domain -eq 'workgroup') {
     $specSplat = @{
