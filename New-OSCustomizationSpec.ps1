@@ -56,9 +56,7 @@ $role_script = $role.Replace(' ','_').ToLower()
 
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
-    #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
-    #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
-    "cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\netcfg.json -Value $networking_cfg_file_contents"
+    "cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\netcfg.json -Value $networking_cfg_file_contents",
     "cmd.exe /C Powershell.exe -ExecutionPolicy Bypass Add-Content -Path C:\deploy\diskcfg.json -Value $disk_cfg_file_contents",
     "c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
     "c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
