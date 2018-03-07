@@ -93,7 +93,7 @@ pipeline {
         stage('get VM Static') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Get-VMIP.ps1 -Stage Static
+                    .\\Get-BuildData.ps1 | .\\Get-VMIP.ps1 -Stage static
                 '''
             }
         }      

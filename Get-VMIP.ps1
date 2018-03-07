@@ -30,6 +30,8 @@ $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_u
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
+Write-Information "Get-VMIP is currenlty running under the context: $stage"
+
 try {
     # wait 10 min for the vm to post tool's status
     $vm = Get-VM -Name $vmname
@@ -46,6 +48,7 @@ try {
         'DHCP' {
             while (($i -le $maxIntervals) -and ($ip -eq $null))
             {
+                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
@@ -67,6 +70,7 @@ try {
         'static' {
             while (($i -le $maxIntervals) -and ($ip -ne $networking_cfg.ip))
             {
+                Write-Information "Current interval $i, $($i * $waitIntervalSeconds) sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
                 $ip = $vm.Guest.IPAddress | ?{$_.split('.').count -eq 4} | ?{$_.split('.')[0] -ne '169'}
@@ -81,7 +85,7 @@ try {
                 if ($i -eq $maxIntervals)
                 {
                     # maxIntervals reached, error out
-                    Write-Error "The system never posted the static IP address $desiredIP after waiting $timeoutSeconds seconds"
+                    Write-Error "The system never posted the static IP address $($networking_cfg.ip) after waiting $timeoutSeconds seconds"
                 }
             }
         }
