@@ -35,7 +35,7 @@ try{
     if ($clusterPortGroup) {
         Get-VM -Name $vmname | Get-NetworkAdapter | Set-NetworkAdapter -Portgroup $clusterPortGroup -Confirm:$false
         sleep -Seconds 5
-        $vm = Get-VM -Name vmname | Get-NetworkAdapter
+        $vm = Get-VM -Name $vmname | Get-NetworkAdapter
         if ($vm.NetworkName -eq $networking_cfg.portgroup) {
             Write-Information "The desired port group $($clusterPortGroup.name) matches what is currenly on the VM $($vm.NetworkName)"
             continue

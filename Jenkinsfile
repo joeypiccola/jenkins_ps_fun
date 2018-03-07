@@ -104,7 +104,7 @@ pipeline {
                 '''
             }
         }
-        stage('restart vm') {
+        stage('restart VM') {
             steps {
                 powershell '''
                     .\\Get-BuildData.ps1 | .\\Restart-VMGuest.ps1
