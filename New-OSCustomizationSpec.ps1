@@ -64,6 +64,22 @@ $string_217 = 'a' * 217
 $string_218 = 'a' * 218
 $string_219 = 'a' * 219
 
+$string_220 = 'a' * 220
+$string_221 = 'a' * 220
+$string_222 = 'a' * 220
+$string_223 = 'a' * 220
+$string_224 = 'a' * 220
+$string_225 = 'a' * 220
+$string_226 = 'a' * 220
+$string_227 = 'a' * 220
+$string_228 = 'a' * 220
+$string_229 = 'a' * 220
+$string_230 = 'a' * 220
+$string_231 = 'a' * 220
+$string_232 = 'a' * 220
+$string_233 = 'a' * 220
+$string_234 = 'a' * 220
+
 
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
@@ -76,7 +92,24 @@ $selectedConfigRunOnce = @(
     "cmd /c echo $string_216 >> c:\deploy\filexx_256.txt",
     "cmd /c echo $string_217 >> c:\deploy\filexx_257.txt",
     "cmd /c echo $string_218 >> c:\deploy\filexx_258.txt",
-    "cmd /c echo $string_219 >> c:\deploy\filexx_259.txt"
+    "cmd /c echo $string_219 >> c:\deploy\filexx_259.txt",
+    "cmd /c echo $string_220 >> c:\deploy\filexx_260.txt",
+    "cmd /c echo $string_221 >> c:\deploy\filexx_261.txt",
+    "cmd /c echo $string_222 >> c:\deploy\filexx_262.txt",
+    "cmd /c echo $string_223 >> c:\deploy\filexx_263.txt",
+    "cmd /c echo $string_224 >> c:\deploy\filexx_264.txt",
+    "cmd /c echo $string_225 >> c:\deploy\filexx_265.txt",
+    "cmd /c echo $string_226 >> c:\deploy\filexx_266.txt",
+    "cmd /c echo $string_227 >> c:\deploy\filexx_267.txt",
+    "cmd /c echo $string_228 >> c:\deploy\filexx_268.txt",
+    "cmd /c echo $string_229 >> c:\deploy\filexx_269.txt",
+    "cmd /c echo $string_230 >> c:\deploy\filexx_270.txt",
+    "cmd /c echo $string_231 >> c:\deploy\filexx_271.txt",
+    "cmd /c echo $string_232 >> c:\deploy\filexx_271.txt",
+    "cmd /c echo $string_233 >> c:\deploy\filexx_271.txt",
+    "cmd /c echo $string_234 >> c:\deploy\filexx_271.txt"
+
+
     #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
     #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
     #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
