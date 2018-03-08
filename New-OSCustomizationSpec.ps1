@@ -53,30 +53,30 @@ $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
 # take the provided role and replace the spaces with an underscore
 $role_script = $role.Replace(' ','_').ToLower()
 
-$string_245 = 'a' * 245
-$string_246 = 'a' * 246
-$string_247 = 'a' * 247
-$string_248 = 'a' * 248
-$string_249 = 'a' * 249
-$string_250 = 'a' * 250
-$string_251 = 'a' * 251
-$string_252 = 'a' * 252
-$string_253 = 'a' * 253
-$string_254 = 'a' * 254
+$string_210 = 'a' * 210
+$string_211 = 'a' * 211
+$string_212 = 'a' * 212
+$string_213 = 'a' * 213
+$string_214 = 'a' * 214
+$string_215 = 'a' * 215
+$string_216 = 'a' * 216
+$string_217 = 'a' * 217
+$string_218 = 'a' * 218
+$string_219 = 'a' * 219
 
 
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
-    "cmd /c echo $string_245 >> c:\deploy\filexx_285.txt",
-    "cmd /c echo $string_246 >> c:\deploy\filexx_286.txt",
-    "cmd /c echo $string_247 >> c:\deploy\filexx_287.txt",
-    "cmd /c echo $string_248 >> c:\deploy\filexx_288.txt",
-    "cmd /c echo $string_249 >> c:\deploy\filexx_289.txt",
-    "cmd /c echo $string_250 >> c:\deploy\filexx_290.txt",
-    "cmd /c echo $string_251 >> c:\deploy\filexx_285.txt",
-    "cmd /c echo $string_252 >> c:\deploy\filexx_291.txt",
-    "cmd /c echo $string_253 >> c:\deploy\filexx_292.txt",
-    "cmd /c echo $string_254 >> c:\deploy\filexx_293.txt"
+    "cmd /c echo $string_210 >> c:\deploy\filexx_250.txt",
+    "cmd /c echo $string_211 >> c:\deploy\filexx_251.txt",
+    "cmd /c echo $string_212 >> c:\deploy\filexx_252.txt",
+    "cmd /c echo $string_213 >> c:\deploy\filexx_253.txt",
+    "cmd /c echo $string_214 >> c:\deploy\filexx_254.txt",
+    "cmd /c echo $string_215 >> c:\deploy\filexx_255.txt",
+    "cmd /c echo $string_216 >> c:\deploy\filexx_256.txt",
+    "cmd /c echo $string_217 >> c:\deploy\filexx_257.txt",
+    "cmd /c echo $string_218 >> c:\deploy\filexx_258.txt",
+    "cmd /c echo $string_219 >> c:\deploy\filexx_259.txt"
     #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
     #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
     #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
