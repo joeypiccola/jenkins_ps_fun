@@ -45,7 +45,8 @@ $InformationPreference = 'Continue'
 $WarningPreference = 'Continue'
 
 # take the provided disk config and convert it to a flat json string
-$disk_cfg_file_contents = $disk_cfg | ConvertTo-Json -Compress
+$disk_cfg_file_contents_2 = $disk_cfg.disks | ConvertTo-Json -Compress
+$disk_cfg_file_contents_1 = $disk_cfg | ConvertTo-Json -Compress
 
 # take the provided networking config and convert it to a flat json string
 $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
@@ -106,11 +107,10 @@ $selectedConfigRunOnce = @(
     "cmd /c echo $string_231 >> c:\deploy\filexx_271.txt",
     "cmd /c echo $string_232 >> c:\deploy\filexx_271.txt",
     "cmd /c echo $string_233 >> c:\deploy\filexx_271.txt",
-    "cmd /c echo $string_234 >> c:\deploy\filexx_271.txt"
-
-
-    #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
-    #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
+    "cmd /c echo $string_234 >> c:\deploy\filexx_271.txt",
+    "cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
+    "cmd /c echo $disk_cfg_file_contents_1 >> c:\deploy\diskcfg.json",
+    "cmd /c echo $disk_cfg_file_contents_2 >> c:\deploy\diskcfg.json"
     #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
     #"c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
     #"c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
