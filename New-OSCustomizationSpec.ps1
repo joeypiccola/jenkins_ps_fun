@@ -54,15 +54,15 @@ $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
 $role_script = $role.Replace(' ','_').ToLower()
 
 $string_245 = 'a' * 245
-$string_245 = 'a' * 246
-$string_245 = 'a' * 247
-$string_245 = 'a' * 248
-$string_245 = 'a' * 249
-$string_245 = 'a' * 250
-$string_245 = 'a' * 251
-$string_245 = 'a' * 252
-$string_245 = 'a' * 253
-$string_245 = 'a' * 254
+$string_246 = 'a' * 246
+$string_247 = 'a' * 247
+$string_248 = 'a' * 248
+$string_249 = 'a' * 249
+$string_250 = 'a' * 250
+$string_251 = 'a' * 251
+$string_252 = 'a' * 252
+$string_253 = 'a' * 253
+$string_254 = 'a' * 254
 
 
 # build an array of run once commands 
