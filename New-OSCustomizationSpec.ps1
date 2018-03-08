@@ -67,15 +67,15 @@ $string_245 = 'a' * 254
 
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
-    "cmd /c echo $string_245 >> c:\deploy\filexx_285.txt"
-    "cmd /c echo $string_246 >> c:\deploy\filexx_286.txt"
-    "cmd /c echo $string_247 >> c:\deploy\filexx_287.txt"
-    "cmd /c echo $string_248 >> c:\deploy\filexx_288.txt"
-    "cmd /c echo $string_249 >> c:\deploy\filexx_289.txt"
-    "cmd /c echo $string_250 >> c:\deploy\filexx_290.txt"
-    "cmd /c echo $string_251 >> c:\deploy\filexx_285.txt"
-    "cmd /c echo $string_252 >> c:\deploy\filexx_291.txt"
-    "cmd /c echo $string_253 >> c:\deploy\filexx_292.txt"
+    "cmd /c echo $string_245 >> c:\deploy\filexx_285.txt",
+    "cmd /c echo $string_246 >> c:\deploy\filexx_286.txt",
+    "cmd /c echo $string_247 >> c:\deploy\filexx_287.txt",
+    "cmd /c echo $string_248 >> c:\deploy\filexx_288.txt",
+    "cmd /c echo $string_249 >> c:\deploy\filexx_289.txt",
+    "cmd /c echo $string_250 >> c:\deploy\filexx_290.txt",
+    "cmd /c echo $string_251 >> c:\deploy\filexx_285.txt",
+    "cmd /c echo $string_252 >> c:\deploy\filexx_291.txt",
+    "cmd /c echo $string_253 >> c:\deploy\filexx_292.txt",
     "cmd /c echo $string_254 >> c:\deploy\filexx_293.txt"
     #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
     #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json"
