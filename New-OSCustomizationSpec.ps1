@@ -45,8 +45,7 @@ $InformationPreference = 'Continue'
 $WarningPreference = 'Continue'
 
 # take the provided disk config and convert it to a flat json string
-$disk_cfg_file_contents_2 = $disk_cfg.disks | ConvertTo-Json -Compress
-$disk_cfg_file_contents_1 = $disk_cfg | ConvertTo-Json -Compress
+$disk_cfg_file_contents = $disk_cfg | ConvertTo-Json -Compress
 
 # take the provided networking config and convert it to a flat json string
 $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
@@ -54,63 +53,12 @@ $networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
 # take the provided role and replace the spaces with an underscore
 $role_script = $role.Replace(' ','_').ToLower()
 
-$string_210 = 'a' * 210
-$string_211 = 'a' * 211
-$string_212 = 'a' * 212
-$string_213 = 'a' * 213
-$string_214 = 'a' * 214
-$string_215 = 'a' * 215
-$string_216 = 'a' * 216
-$string_217 = 'a' * 217
-$string_218 = 'a' * 218
-$string_219 = 'a' * 219
-
-$string_220 = 'a' * 220
-$string_221 = 'a' * 221
-$string_222 = 'a' * 222
-$string_223 = 'a' * 223
-$string_224 = 'a' * 224
-$string_225 = 'a' * 225
-$string_226 = 'a' * 226
-$string_227 = 'a' * 227
-$string_228 = 'a' * 228
-$string_229 = 'a' * 229
-$string_230 = 'a' * 230
-$string_231 = 'a' * 231
-$string_232 = 'a' * 232
-$string_233 = 'a' * 233
-$string_234 = 'a' * 234
-
 # build an array of run once commands 
 $selectedConfigRunOnce = @(
-    "cmd /c echo $string_210 >> c:\deploy\filexx_250.txt",
-    "cmd /c echo $string_211 >> c:\deploy\filexx_251.txt",
-    "cmd /c echo $string_212 >> c:\deploy\filexx_252.txt",
-    "cmd /c echo $string_213 >> c:\deploy\filexx_253.txt",
-    "cmd /c echo $string_214 >> c:\deploy\filexx_254.txt",
-    "cmd /c echo $string_215 >> c:\deploy\filexx_255.txt",
-    "cmd /c echo $string_216 >> c:\deploy\filexx_256.txt",
-    "cmd /c echo $string_217 >> c:\deploy\filexx_257.txt",
-    "cmd /c echo $string_218 >> c:\deploy\filexx_258.txt",
-    "cmd /c echo $string_219 >> c:\deploy\filexx_259.txt",
-    "cmd /c echo $string_220 >> c:\deploy\filexx_260.txt",
-    "cmd /c echo $string_221 >> c:\deploy\filexx_261.txt",
-    "cmd /c echo $string_222 >> c:\deploy\filexx_262.txt",
-    "cmd /c echo $string_223 >> c:\deploy\filexx_263.txt",
-    "cmd /c echo $string_224 >> c:\deploy\filexx_264.txt",
-    "cmd /c echo $string_225 >> c:\deploy\filexx_265.txt",
-    "cmd /c echo $string_226 >> c:\deploy\filexx_266.txt",
-    "cmd /c echo $string_227 >> c:\deploy\filexx_267.txt",
-    "cmd /c echo $string_228 >> c:\deploy\filexx_268.txt",
-    "cmd /c echo $string_229 >> c:\deploy\filexx_269.txt",
-    "cmd /c echo $string_230 >> c:\deploy\filexx_270.txt",
-    "cmd /c echo $string_231 >> c:\deploy\filexx_271.txt",
-    "cmd /c echo $string_232 >> c:\deploy\filexx_271.txt",
-    "cmd /c echo $string_233 >> c:\deploy\filexx_271.txt",
-    "cmd /c echo $string_234 >> c:\deploy\filexx_271.txt",
-    "cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
-    "cmd /c echo $disk_cfg_file_contents_1 >> c:\deploy\diskcfg.json",
-    "cmd /c echo $disk_cfg_file_contents_2 >> c:\deploy\diskcfg.json"
+    #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
+    #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json",
+    "c:\deploy\callps.bat command `"cmd /c echo $networking_cfg_file_contents >> c:\deploy\diskcfg.json`""
+    "c:\deploy\callps.bat command `"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json`""
     #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
     #"c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
     #"c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
