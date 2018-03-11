@@ -46,8 +46,7 @@ try {
             $waitIntervalSeconds = 5
             $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 600 / 5 = 120
             $i = 1
-            while (($i -le $maxIntervals) -and ($ip -eq $null))
-            {
+            while (($i -le $maxIntervals) -and ($ip -eq $null)) {
                 Write-Information "Current interval $i, $($i * $waitIntervalSeconds) of $timeoutSeconds sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
@@ -73,8 +72,7 @@ try {
             $waitIntervalSeconds = 5
             $maxIntervals = $timeoutSeconds / $waitIntervalSeconds # this is 900 / 5 = 180
             $i = 1
-            while (($i -le $maxIntervals) -and ($ip -ne $networking_cfg.ip))
-            {
+            while (($i -le $maxIntervals) -and ($ip -ne $networking_cfg.ip)) {
                 Write-Information "Current interval $i, $($i * $waitIntervalSeconds) of $timeoutSeconds sec elapsed so far"
                 $vm = Get-VM -Name $vmname
                 # get IPs that are IPV4 (e.g. 4 indexs split on a dot) and that are not APIPA
