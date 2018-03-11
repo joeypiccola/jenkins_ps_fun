@@ -90,6 +90,13 @@ pipeline {
                 '''
             }
         }
+        stage('invoke config') {
+            steps {
+                powershell '''
+                    .\\Get-BuildData.ps1 | .\\Invoke-VMScript.ps1 -Stage DHCP
+                '''
+            }
+        }        
         stage('get VM Static') {
             steps {
                 powershell '''
