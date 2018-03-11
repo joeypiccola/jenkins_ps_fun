@@ -90,10 +90,17 @@ pipeline {
                 '''
             }
         }
+        stage('wait sysprep') {
+            steps {
+                powershell '''
+                    Start-Sleep -Seconds 300
+                '''
+            }
+        }        
         stage('invoke config') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Invoke-VMScript.ps1 -Stage DHCP
+                    .\\Get-BuildData.ps1 | .\\Invoke-VMScript.ps1
                 '''
             }
         }        
