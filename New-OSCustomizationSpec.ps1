@@ -13,10 +13,10 @@ Param (
     [string]$ad_pass
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$workgroup_user	
+    [string]$localadmin_user	
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$workgroup_pass
+    [string]$localadmin_pass
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$vcenter
@@ -44,26 +44,6 @@ $ErrorActionPreference = 'Stop'
 $InformationPreference = 'Continue'
 $WarningPreference = 'Continue'
 
-# take the provided disk config and convert it to a flat json string
-$disk_cfg_file_contents = $disk_cfg | ConvertTo-Json -Compress
-
-# take the provided networking config and convert it to a flat json string
-$networking_cfg_file_contents = $networking_cfg | ConvertTo-Json -Compress
-
-# take the provided role and replace the spaces with an underscore
-$role_script = $role.Replace(' ','_').ToLower()
-
-# build an array of run once commands 
-$selectedConfigRunOnce = @(
-    #"cmd /c echo $networking_cfg_file_contents >> c:\deploy\netcfg.json",
-    #"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json",
-    "c:\deploy\callps.bat command `"cmd /c echo $networking_cfg_file_contents >> c:\deploy\diskcfg.json`""
-    "c:\deploy\callps.bat command `"cmd /c echo $disk_cfg_file_contents >> c:\deploy\diskcfg.json`""
-    #"c:\deploy\callps.bat command `"iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex`"",
-    #"c:\deploy\callps.bat command `"& 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config`"",
-    #"c:\deploy\callps.bat file `"c:\deploy\config\$win_domain\$role_script.ps1`""
-)
-
 # build a param splat based on the provided win_domain for the vmware customization spec
 if ($win_domain -eq 'workgroup') {
     $specSplat = @{
@@ -71,10 +51,9 @@ if ($win_domain -eq 'workgroup') {
         OSType                = 'Windows'
         ChangeSid             = $true
         OrgName               = 'Workgroup'
-        FullName              = $workgroup_user
-        AdminPassword         = $workgroup_pass
+        FullName              = $localadmin_user
+        AdminPassword         = $localadmin_pass
         AutoLogonCount        = 2
-        GuiRunOnce            = $selectedConfigRunOnce
         Description           = 'this is a dyn generated on the fly customization spec'
         Workgroup             = 'workgroup'
         LicenseMode           = 'Perserver'
@@ -88,10 +67,9 @@ if ($win_domain -eq 'workgroup') {
         OSType                = 'Windows'
         ChangeSid             = $true
         OrgName               = $win_domain
-        FullName              = $workgroup_user
-        AdminPassword         = $workgroup_pass
+        FullName              = $localadmin_user
+        AdminPassword         = $localadmin_pass
         AutoLogonCount        = 2
-        GuiRunOnce            = $selectedConfigRunOnce
         Description           = 'this is a dyn generated on the fly customization spec'
         Domain                = $win_domain
         DomainUserName        = $ad_user
