@@ -64,7 +64,7 @@ iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex
 "@
 
 try {
-    Invoke-VMScript -VM $vmname -GuestCredential $guest_cred -ScriptType Powershell -ScriptText $script -RunAsync -ToolsWaitSecs 300
+    Invoke-VMScript -VM $vmname -GuestCredential $guest_cred -ScriptType Powershell -ScriptText $script -ToolsWaitSecs 300
 } catch {
     Write-Error $_.Exception.Message
 } finally {
