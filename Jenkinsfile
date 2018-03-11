@@ -93,7 +93,7 @@ pipeline {
         stage('wait sysprep') {
             steps {
                 powershell '''
-                    Start-Sleep -Seconds 300
+                    Start-Sleep -Seconds 420
                 '''
             }
         }        
