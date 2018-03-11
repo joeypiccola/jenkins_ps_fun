@@ -3,7 +3,7 @@
 $i++
 $disks = @()
 $letters = @('R','S','T','U','V')
-<#0 .. 1 | ForEach-Object{
+0 .. 4 | ForEach-Object{
     $disk = [PSCustomObject]@{
         size   = @(1..2) | Get-Random 
         letter = $letters[$_]
@@ -11,7 +11,7 @@ $letters = @('R','S','T','U','V')
         au     = '4096'
     }
     $disks += $disk
-}#>
+}
 
 $disk_cfg = [PSCustomObject]@{
     disks = $disks
@@ -20,7 +20,7 @@ $disk_cfg = [PSCustomObject]@{
 }
 
 $networking_cfg = [PSCustomObject]@{
-    ip          = "10.0.5.$(@(150..240) | Get-Random -count 1)"
+    ip          = "10.0.5.$(@(100..240) | Get-Random -count 1)"
     netmask     = '255.255.255.0'
     gateway     = '10.0.5.1'
     dns_servers = @('10.0.3.21','10.0.0.22','8.8.8.8')
@@ -28,8 +28,8 @@ $networking_cfg = [PSCustomObject]@{
 }
 $hardware_cfg = [PSCustomObject]@{
     cores = 1
-    sockets = 2
-    memory = 2
+    sockets = 4
+    memory = 6
 }
 
 $request = [pscustomobject]@{
