@@ -7,12 +7,6 @@ Param (
     [string]$vcenter_pass
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$ad_user	
-    ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$ad_pass
-    ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$localadmin_user	
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
@@ -29,9 +23,6 @@ Param (
     ,
     [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
     [string]$win_domain
-    ,
-    [Parameter(ValueFromPipeline,ValueFromPipelineByPropertyName)]
-    [string]$cspec_name
     ,
     [Parameter(ValueFromPipelineByPropertyName)]
     [pscustomobject]$disk_cfg
@@ -65,8 +56,8 @@ $role_script = $role.Replace(' ','_').ToLower()
 
 # build invoke script
 $script = @"
-Add-Content -Path C:\deploy\diskcfg.json -Value `'$disk_cfg_file_contents`'
-Add-Content -Path C:\deploy\netcfg.json -Value `'$networking_cfg_file_contents`'
+Add-Content -Path C:\deploy\diskcfg.json -Value `'$disk_cfg_file_contents`' -Force
+Add-Content -Path C:\deploy\netcfg.json -Value `'$networking_cfg_file_contents`' -Force
 iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex
 & 'c:\Program Files\Git\cmd\git.exe' clone -b master https://github.com/joeypiccola/vmware-runonce.git c:\deploy\config
 . c:\deploy\config\$win_domain\$role_script.ps1
