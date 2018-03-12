@@ -29,7 +29,7 @@ $vcenter_cred = New-Object System.Management.Automation.PSCredential ($vcenter_u
 Get-Module -ListAvailable VMware* | Import-Module
 Connect-VIServer -Server $vcenter -Credential $vcenter_cred
 
-try{
+try {
     $clusterHost = Get-Cluster -Name $cluster | Get-VMHost | ?{ $_.ConnectionState -eq 'Connected' } | Get-Random -Count 1
     $clusterPortGroup = $clusterHost | Get-VDSwitch | Get-VDPortgroup | ?{$_.name -eq $networking_cfg.portgroup}
     if ($clusterPortGroup) {
