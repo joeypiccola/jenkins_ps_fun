@@ -1,12 +1,15 @@
 $builddata = Get-Content '.\builddata.json' | ConvertFrom-Json
 
-# take 'ad.contoso.com' and make it 'adcontosocom'
-# remove all dots from win_domain var
-# generate the env var $env:cred_ad_adcontosocom_USR and get the value
-# generate the env var $env:cred_ad_adcontosocom_PSW and get the value
-$ad_key = ($builddata.win_domain.replace('.',''))
-$ad_user = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_USR')).value
-$ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_PSW')).value
+# if the build is for a workgroup then do not define ad credentials as they do not exist
+if ($builddata.win_domain -ne 'workgroup') {
+    # take 'ad.contoso.com' and make it 'adcontosocom'
+    # remove all dots from win_domain var
+    # generate the env var $env:cred_ad_adcontosocom_USR and get the value
+    # generate the env var $env:cred_ad_adcontosocom_PSW and get the value
+    $ad_key = ($builddata.win_domain.replace('.',''))
+    $ad_user = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_USR')).value
+    $ad_pass = (Get-ChildItem -Path ('env:cred_ad_' + $ad_key + '_PSW')).value
+}
 
 # take 'vcenter.dallas.contoso.com' and make it 'adcontosocom'
 # remove all dots and hostname from vcenter var
