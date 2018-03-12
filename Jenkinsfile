@@ -93,14 +93,14 @@ pipeline {
         stage('wait sysprep') {
             steps {
                 powershell '''
-                    Start-Sleep -Seconds 420
+                    Start-Sleep -Seconds 600
                 '''
             }
         }        
-        stage('invoke config') {
+        stage('initialize config') {
             steps {
                 powershell '''
-                    .\\Get-BuildData.ps1 | .\\Invoke-VMScript.ps1
+                    .\\Get-BuildData.ps1 | .\\Initialize-Config.ps1
                 '''
             }
         }        
