@@ -66,7 +66,6 @@ iwr http://nuget.ad.piccola.us:8081/chocogit.ps1 -UseBasicParsing | iex
 try {
     $in = Invoke-VMScript -VM $vmname -GuestCredential $guest_cred -ScriptType Powershell -ScriptText $script -ToolsWaitSecs 300 -RunAsync
     Write-Output $in
-    <#
     $dur = 0
     while ($dur -ne 30) {
         Write-Information "Invoke state ($dur): $($in.state)"
@@ -74,7 +73,6 @@ try {
         Start-Sleep -Seconds 1
     }
     Write-Output $in
-    #>
 } catch {
     Write-Error $_.Exception.Message
 } finally {
