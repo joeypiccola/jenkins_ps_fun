@@ -49,12 +49,17 @@ try {
 $ad_pass_sec = ConvertTo-SecureString $ad_pass -AsPlainText -Force
 $ad_creds = New-Object System.Management.Automation.PSCredential ($ad_user, $ad_pass_sec) 
 
-# try and get the object from ad. on error, write info not error. evalualte the results at the end
-try {
-    Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
-} catch {
+# if the build is for a workgroup then do not check AD for an existing object
+if ($win_domain -ne 'workgroup') {
+    # try and get the object from ad. on error, write info not error. evalualte the results at the end
+    try {
+        Get-ADComputer -Identity $vmname -Credential $ad_creds -Server $win_domain
+    } catch {
+        $adquery = $false
+        Write-Information $_.Exception.Message
+    }
+} else {
     $adquery = $false
-    Write-Information $_.Exception.Message
 }
 
 Write-Information "ADObject `"$vmname`" $adquery in $win_domain"
